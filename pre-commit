@@ -1,4 +1,0 @@
-rake barista:brew
-jammit
-git add public/assets/*
-git add public/javascripts/*
