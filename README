@@ -1,3 +1,8 @@
 == Sample Backbone.js-based Forum App
 
 For learning and exploring the capabilities of Backbone.js + Rails. Written in Coffeescript.
+
+All backbone.js coffeescript files are in app/coffeescripts.
+All EJS backbone.js templates are in app/templates.
+
+This project uses JAMMIT to compile templates and JS via pre-commit hooks (install jammit [gem install jammit] and move project-root/pre-commit to project-root/.git/hooks/pre-commit for it to work).
