@@ -11,6 +11,7 @@ javascript_compressor:  yui         # (yui, closure)
 javascripts:
   workspace:
     - public/javascripts/vendor/**/*.js
+    - public/javascripts/app/forum.js
     - public/javascripts/app/**/*.js
     - app/templates/**/*.jst
 

@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Thu, 17 Nov 2011 22:43:03 GMT from
+/* DO NOT MODIFY. This file was compiled Thu, 17 Nov 2011 23:07:09 GMT from
  * /Users/Hursh/roundtable/forum/app/coffeescripts/app/forum.coffee
  */
 
@@ -11,7 +11,6 @@
     Views: {},
     Routers: {},
     init: function() {
-      new Forum.Routers.Tasks();
       return Backbone.history.start();
     }
   };

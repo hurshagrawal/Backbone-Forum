@@ -4,5 +4,5 @@ forum =
 	Views: {}
 	Routers: {}
 	init: ->
-		new Forum.Routers.Tasks()
+		# new Forum.Routers.Tasks()
 		Backbone.history.start()
