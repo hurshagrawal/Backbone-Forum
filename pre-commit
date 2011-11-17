@@ -1,19 +1,6 @@
-#!/usr/bin/env ruby
+#!/bin/sh
 
-require 'rubygems'
-require 'jammit'
-
-%x[rake barista:brew] #compiles to coffescript
-
-print "Jammit check... "
-status_before = %x[git status --porcelain --untracked-files=no]
-Jammit.package!
-status_after = %x[git status --porcelain --untracked-files=no]
-jammit_files = (status_after.split("\n") - status_before.split("\n")).map { |f| f.split[1] }
-unless jammit_files.empty?
-  puts "FAIL"
-  puts "Looks like you forgot to run jammit"
-  puts "Run `git add #{jammit_files.join(' ')}` and try committing again"
-  exit 1
-end
-puts "PASS"
+#rake barista:brew
+jammit
+git add public/assets/*
+git add public/javascripts/*
