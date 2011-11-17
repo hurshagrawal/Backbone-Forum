@@ -1,5 +1,5 @@
-/* DO NOT MODIFY. This file was compiled Thu, 17 Nov 2011 22:18:26 GMT from
- * /Users/Hursh/roundtable/forum/app/coffeescripts/forum.coffee
+/* DO NOT MODIFY. This file was compiled Thu, 17 Nov 2011 22:43:03 GMT from
+ * /Users/Hursh/roundtable/forum/app/coffeescripts/app/forum.coffee
  */
 
 (function() {
