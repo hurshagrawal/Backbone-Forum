@@ -1,3 +1,5 @@
+#!/bin/sh
+
 rake barista:brew
 jammit
 git add public/assets/*
