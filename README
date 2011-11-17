@@ -5,4 +5,8 @@ For learning and exploring the capabilities of Backbone.js + Rails. Written in C
 All backbone.js coffeescript files are in app/coffeescripts.
 All EJS backbone.js templates are in app/templates.
 
-This project uses JAMMIT to compile templates and JS via pre-commit hooks (install jammit [gem install jammit] and move project-root/pre-commit to project-root/.git/hooks/pre-commit for it to work).
+This project uses JAMMIT to compile templates and JS via pre-commit hooks. To install JAMMIT and get it working, type the following into the console from the project root:
+
+gem install jammit
+mv ./pre-commit ./.git/hooks/pre-commit
+chmod u+x .git/hooks/pre-commit
