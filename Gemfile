@@ -7,6 +7,9 @@ gem 'rails', '3.0.9'
 
 gem 'sqlite3'
 
+# templating
+gem "haml", "3.1.3"
+
 # Deploy with Capistrano
 # gem 'capistrano'
 

@@ -1,4 +1,4 @@
-forum =
+window.forum =
 	Models: {}
 	Collections: {}
 	Views: {}

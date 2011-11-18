@@ -73,4 +73,4 @@ src_dir:
 #
 # spec_dir: spec/javascripts
 #
-spec_dir: public/javascripts/spec
+spec_dir: spec/javascripts
