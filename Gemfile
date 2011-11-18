@@ -10,13 +10,15 @@ gem 'sqlite3'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# JS BDD
-gem 'jasmine'
-
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development do
-	 gem "barista", "1.2.1" #coffeescript compilation
-	 gem 'jasmine'
+	gem 'jasmine'
+	gem 'jammit'
+	gem 'guard'
+	gem 'rb-inotify', :require => false
+	gem 'rb-fsevent', :require => false
+	gem 'rb-fchange', :require => false
+	gem 'guard-coffeescript'
 end

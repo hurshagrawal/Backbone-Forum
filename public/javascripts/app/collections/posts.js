@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Thu, 17 Nov 2011 23:07:10 GMT from
+/* DO NOT MODIFY. This file was compiled Thu, 17 Nov 2011 23:22:50 GMT from
  * /Users/Hursh/roundtable/forum/app/coffeescripts/app/collections/posts.coffee
  */
 
@@ -12,6 +12,10 @@
     function Posts() {
       Posts.__super__.constructor.apply(this, arguments);
     }
+
+    Posts.prototype.model = forum.Models.Post;
+
+    Posts.prototype.url = '/posts';
 
     return Posts;
 

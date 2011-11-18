@@ -10,9 +10,14 @@ javascript_compressor:  yui         # (yui, closure)
 
 javascripts:
   workspace:
-    - public/javascripts/vendor/**/*.js
+    - public/javascripts/vendor/jquery-1.7.min.js
+    - public/javascripts/vendor/underscore-min.js
+    - public/javascripts/vendor/backbone-min.js
+    - public/javascripts/app/models/*.js
+    - public/javascripts/app/collections/*.js
+    - public/javascripts/app/views/*.js
+    - public/javascripts/app/routers/*.js
     - public/javascripts/app/forum.js
-    - public/javascripts/app/**/*.js
     - app/templates/**/*.jst
 
 stylesheets:

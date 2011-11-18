@@ -3,6 +3,7 @@ forum =
 	Collections: {}
 	Views: {}
 	Routers: {}
-	init: ->
-		# new Forum.Routers.Tasks()
+	init: (posts) ->
+		new Forum.Routers.Posts()
+		@tasks = new Forum.Collections.Posts posts
 		Backbone.history.start()

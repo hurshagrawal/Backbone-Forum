@@ -1,4 +1,6 @@
 Forum::Application.routes.draw do
+
+  root :to => "statics#index"
   resources :rooms
   resources :posts
   resources :users

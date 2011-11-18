@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Thu, 17 Nov 2011 23:07:09 GMT from
+/* DO NOT MODIFY. This file was compiled Thu, 17 Nov 2011 23:22:50 GMT from
  * /Users/Hursh/roundtable/forum/app/coffeescripts/app/models/user.coffee
  */
 
