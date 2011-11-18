@@ -1,2 +1,2 @@
-class forum.Models.User extends Backbone.Model
+class forum.User extends Backbone.Model
 

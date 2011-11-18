@@ -1,2 +1,2 @@
-class forum.Models.Post extends Backbone.Model
+class forum.Post extends Backbone.Model
 

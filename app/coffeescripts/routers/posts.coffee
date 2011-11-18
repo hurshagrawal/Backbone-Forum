@@ -1,1 +1,1 @@
-class forum.Routers.Posts extends Backbone.Router
+class forum.PostRouter extends Backbone.Router
