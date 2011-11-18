@@ -2,7 +2,6 @@
 	%head
 		%title Backbone JS Forum
 		= csrf_meta_tag
-		= javascript_include_tag "vendor/jquery-1.7.min", "vendor/underscore-min", "vendor/backbone-min", "forum"
-		- ["models", "collections", "views", "routers"].each do |folder|
-			= javascript_include_tag Dir.chdir(File.join(Rails.root, "public", "javascripts", folder)) { |d| Dir.glob("*.js") }.map {|e| "#{folder}/#{e}"}
+		= include_javascripts :workspace
 	%body
+	%script{}
