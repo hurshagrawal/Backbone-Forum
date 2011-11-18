@@ -22,9 +22,6 @@ javascripts:
 
 stylesheets:
   common:
-    - public/stylesheets/vendor/reset.css
-    - public/stylesheets/ui/*.css
   workspace:
-    - public/stylesheets/pages/workspace.css
+    - public/stylesheets/forum.css
   empty:
-    - public/stylesheets/pages/empty.css
