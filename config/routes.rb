@@ -1,9 +1,12 @@
 Forum::Application.routes.draw do
 
   root :to => "statics#index"
+
   resources :rooms
   resources :posts
   resources :users
+
+  match ':wild' => 'statics#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

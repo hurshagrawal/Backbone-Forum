@@ -3,7 +3,14 @@ class PostsController < ApplicationController
 
 	# GET /posts.json
 	def index
-		@posts = Post.all
+		@posts = Post.all.map do |p|
+			{
+				:id => p.id,
+				:user => p.user.username,
+				:content => p.content
+			}
+		end
+
 		respond_with @posts
 	end
 
@@ -26,7 +33,12 @@ class PostsController < ApplicationController
 
 	# POST /posts.json
 	def create
-		@post = Post.new(params[:post])
+		postEntry = {
+			:user_id => User.where(:username => params[:username]).first.id,
+			:content => params[:content]
+		}
+
+		@post = Post.new postEntry
 
 		if @post.save
 			respond_with @post

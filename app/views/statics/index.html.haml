@@ -4,5 +4,16 @@
 		= csrf_meta_tag
 		= include_javascripts :workspace
 		= include_stylesheets :workspace
+		:javascript
+			$(function() {
+				forum.app = new forum.ForumRouter();
+				Backbone.history.start({ pushState: true });
+				forum.postList.reset(#{@posts});
+			});
+		- if @current_user
+			:javascript
+				$(function() {
+					forum.currentUser.reset(#{@current_user_json});
+				});
 	%body
 		#container
