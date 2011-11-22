@@ -16,16 +16,24 @@
 
     ForumRouter.prototype.initialize = function() {
       forum.currentUser = new forum.User();
-      forum.postList = new forum.PostList();
-      return forum.postListView = new forum.PostListView({
-        collection: forum.postList
+      forum.currentUserView = new forum.UserView({
+        model: forum.currentUser
       });
+      $('#topbar').append(forum.currentUserView.render().el);
+      return forum.postList = new forum.PostList();
     };
 
     ForumRouter.prototype.posts = function() {
       var $container;
       $container = $('#container');
-      return $container.empty().append(forum.postListView.render().el);
+      forum.postListView = new forum.PostListView({
+        collection: forum.postList
+      });
+      forum.postFormView = new forum.PostFormView({
+        collection: forum.postList,
+        model: forum.currentUser
+      });
+      return $container.empty().append(forum.postListView.render().el).append(forum.postFormView.render().el);
     };
 
     return ForumRouter;

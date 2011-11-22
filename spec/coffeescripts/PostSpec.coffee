@@ -1,13 +1,13 @@
 postData = [
-	user: "Hursh Agrawal"
+	username: "Hursh Agrawal"
 	content: "Hello, this is a sample post for testing. Hear me roar."
 ,
-	user: "Herp Derp"
+	username: "Herp Derp"
 	content: "Derp herp derp herp herp derp derp derp testing testing herp derp."
 ]
 
 extraPost =
-	user: "Foo Bar"
+	username: "Foo Bar"
 	content: "Hello there, this is more test data lalalalalalala. Testing 123 456 789."
 
 describe "post", ->
@@ -17,12 +17,11 @@ describe "post", ->
 			@post = new forum.Post postData[0]
 
 		it "creates model from data", ->
-			expect(@post.get('user')).toBe postData[0].user
+			expect(@post.get('username')).toBe postData[0].username
 
 	describe "post view", ->
 		beforeEach ->
 			@post = new forum.Post postData[0]
-			window.JST = { post: _.template readFixtures('post.jst') }
 			@postView = new forum.PostView { model: @post }
 			@postView.render()
 
@@ -47,9 +46,6 @@ describe "post", ->
 
 	describe "post list view", ->
 		beforeEach ->
-			window.JST =
-				post: _.template readFixtures('post.jst')
-				postList: _.template readFixtures('postList.jst')
 			forum.app = new forum.ForumRouter();
 			forum.postList.reset postData
 
@@ -69,6 +65,47 @@ describe "post", ->
 			forum.postList.add extraPost
 			content = $(forum.postListView.el).find('.post:last .content').html()
 			expect(content).toEqual extraPost.content
+
+		describe "submitting new posts", ->
+			beforeEach ->
+				#set mock server for ajax calls
+				sinon.spy $, 'ajax'
+				@server = sinon.fakeServer.create()
+
+				postForm = $(forum.postListView.el).find('.post-form')
+				postForm.find('textarea').val extraPost.content
+				postForm.find('button').click()
+
+			afterEach ->
+				$.ajax.restore()
+				@server.restore()
+
+			describe "successful submit", ->
+				beforeEach ->
+					@server.respondWith [ 200, {}, "" ]
+					@server.respond()
+
+				it "adds to the collection when a new post is posted", ->
+					postArr = $(forum.postListView.el).find '.post'
+					expect(postArr.length).toBe postData.length + 1
+
+				it "puts the newly submitted post last", ->
+					lastPost = $(forum.postListView.el).find '.post:last'
+					expect(lastPost.find('.content').html()).toEqual extraPost.content
+
+			describe "failing submit", ->
+				beforeEach ->
+					@server.respondWith [ 404, {}, "" ]
+					@server.respond()
+
+				it "should not add any more posts", ->
+					postArr = $(forum.postListView.el).find '.post'
+					expect(postArr.length).toBe postData.length
+
+				it "last post should be original last post", ->
+					lastPost = $(forum.postListView.el).find '.post:last'
+					expect(lastPost.find('.content').html()).toNotEqual extraPost.content
+
 
 
 

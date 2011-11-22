@@ -19,16 +19,17 @@ class UsersController < ApplicationController
 		respond_with @user
 	end
 
-	# GET /users/1/edit
-	def edit
-		@user = User.find(params[:id])
-	end
-
 	# POST /users.json
 	def create
-		@user = User.new(params[:user])
+		unless User.where(:username => params['username']).size == 0
+			respond_to { |format| format.json { render :json => {:exists => true} } }
+			return
+		end
+
+		@user = User.new :username => params['username'], :password => params['password']
 
 		if @user.save
+			session[:user_id] = @user.id
 			respond_with @user
 		else
 			respond_with @user, :status => :unprocessable_entity
@@ -51,6 +52,6 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@user.destroy
 
-		respond_width { head :ok }
+		respond_with { head :ok }
 	end
 end

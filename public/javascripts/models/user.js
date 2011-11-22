@@ -9,6 +9,8 @@
       User.__super__.constructor.apply(this, arguments);
     }
 
+    User.prototype.url = '/users';
+
     return User;
 
   })();

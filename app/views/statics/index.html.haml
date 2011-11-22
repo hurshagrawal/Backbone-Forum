@@ -9,11 +9,8 @@
 				forum.app = new forum.ForumRouter();
 				Backbone.history.start({ pushState: true });
 				forum.postList.reset(#{@posts});
+				forum.currentUser.set(#{@current_user_json});
 			});
-		- if @current_user
-			:javascript
-				$(function() {
-					forum.currentUser.reset(#{@current_user_json});
-				});
 	%body
+		#topbar
 		#container

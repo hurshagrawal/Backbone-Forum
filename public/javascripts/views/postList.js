@@ -6,7 +6,6 @@
     __extends(PostListView, Backbone.View);
 
     function PostListView() {
-      this.submit = __bind(this.submit, this);
       this.render = __bind(this.render, this);
       PostListView.__super__.constructor.apply(this, arguments);
     }
@@ -14,10 +13,6 @@
     PostListView.prototype.tagName = 'section';
 
     PostListView.prototype.className = 'post-list';
-
-    PostListView.prototype.events = {
-      'click .post-form button': 'submit'
-    };
 
     PostListView.prototype.initialize = function() {
       this.collection.bind('reset', this.render);
@@ -38,13 +33,6 @@
         return $postList.append(view.render().el);
       });
       return this;
-    };
-
-    PostListView.prototype.submit = function() {
-      return this.collection.create({
-        username: "Hursh",
-        content: this.$('.post-form textarea').val()
-      });
     };
 
     return PostListView;

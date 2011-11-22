@@ -2,9 +2,6 @@ class forum.PostListView extends Backbone.View
 	tagName: 'section'
 	className: 'post-list'
 
-	events:
-		'click .post-form button': 'submit'
-
 	initialize: ->
 		#causes the view to render whenever the collection's data is loaded
 		@collection.bind 'reset', @render
@@ -22,10 +19,4 @@ class forum.PostListView extends Backbone.View
 			$postList.append view.render().el
 
 		return this
-
-	#submits the post - appends to the post list and syncs with server
-	submit: =>
-		@collection.create
-			username: "Hursh"
-			content: this.$('.post-form textarea').val()
 
