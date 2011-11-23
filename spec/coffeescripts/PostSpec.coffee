@@ -10,6 +10,8 @@ extraPost =
 	username: "Foo Bar"
 	content: "Hello there, this is more test data lalalalalalala. Testing 123 456 789."
 
+userData = "{'created_at':'2011-11-18T23:35:07Z','id':1,'updated_at':'2011-11-18T23:35:07Z','username':'Hursh'}"
+
 describe "post", ->
 
 	describe "post model", ->
@@ -46,8 +48,11 @@ describe "post", ->
 
 	describe "post list view", ->
 		beforeEach ->
-			forum.app = new forum.ForumRouter();
+			forum.app = new forum.ForumRouter()
 			forum.postList.reset postData
+			forum.currentUser.set userData
+			forum.app.navigate '', true
+			forum.app.navigate 'postlist', true
 
 		it "creates a postList collection", ->
 			expect(forum.postList.constructor.name).toBe "PostList"
@@ -72,9 +77,8 @@ describe "post", ->
 				sinon.spy $, 'ajax'
 				@server = sinon.fakeServer.create()
 
-				postForm = $(forum.postListView.el).find('.post-form')
-				postForm.find('textarea').val extraPost.content
-				postForm.find('button').click()
+				$('.post-form textarea').val extraPost.content
+				$('.post-form button').click()
 
 			afterEach ->
 				$.ajax.restore()

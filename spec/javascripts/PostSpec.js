@@ -1,4 +1,4 @@
-var extraPost, postData;
+var extraPost, postData, userData;
 
 postData = [
   {
@@ -14,6 +14,8 @@ extraPost = {
   username: "Foo Bar",
   content: "Hello there, this is more test data lalalalalalala. Testing 123 456 789."
 };
+
+userData = "{'created_at':'2011-11-18T23:35:07Z','id':1,'updated_at':'2011-11-18T23:35:07Z','username':'Hursh'}";
 
 describe("post", function() {
   describe("post model", function() {
@@ -66,7 +68,10 @@ describe("post", function() {
   return describe("post list view", function() {
     beforeEach(function() {
       forum.app = new forum.ForumRouter();
-      return forum.postList.reset(postData);
+      forum.postList.reset(postData);
+      forum.currentUser.set(userData);
+      forum.app.navigate('', true);
+      return forum.app.navigate('postlist', true);
     });
     it("creates a postList collection", function() {
       return expect(forum.postList.constructor.name).toBe("PostList");
@@ -89,12 +94,10 @@ describe("post", function() {
     });
     return describe("submitting new posts", function() {
       beforeEach(function() {
-        var postForm;
         sinon.spy($, 'ajax');
         this.server = sinon.fakeServer.create();
-        postForm = $(forum.postListView.el).find('.post-form');
-        postForm.find('textarea').val(extraPost.content);
-        return postForm.find('button').click();
+        $('.post-form textarea').val(extraPost.content);
+        return $('.post-form button').click();
       });
       afterEach(function() {
         $.ajax.restore();

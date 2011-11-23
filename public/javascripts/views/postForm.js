@@ -26,11 +26,12 @@
     };
 
     PostFormView.prototype.render = function() {
-      if (typeof (this.model.get('username')) === "undefined") {
-        $(this.el).html('');
-      } else {
+      if (this.model.get('username') != null) {
         $(this.el).html(JST['postForm']());
+      } else {
+        $(this.el).html('');
       }
+      this.delegateEvents();
       return this;
     };
 

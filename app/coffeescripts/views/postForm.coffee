@@ -12,11 +12,12 @@ class forum.PostFormView extends Backbone.View
 		@model.bind 'change', @render
 
 	render: =>
-		if typeof(@model.get 'username') == "undefined"
-			$(@el).html ''
-		else
+		if @model.get('username')?
 			$(@el).html JST['postForm']()
+		else
+			$(@el).html ''
 
+		@delegateEvents() #rebind events
 		return this
 
 	#submits the post - appends to the post list and syncs with server
@@ -24,3 +25,4 @@ class forum.PostFormView extends Backbone.View
 		@collection.create
 			username: @model.get 'username'
 			content: this.$('textarea').val()
+

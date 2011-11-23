@@ -13,6 +13,10 @@ class forum.ForumRouter extends Backbone.Router
 		#makes and renders list of posts
 		forum.postList = new forum.PostList()
 
+	home: ->
+		$container = $("#container")
+		$container.empty()
+
 	posts: ->
 		$container = $('#container')
 

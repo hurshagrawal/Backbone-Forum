@@ -11,10 +11,10 @@ class forum.UserView extends Backbone.View
 		@model.bind 'change', @render
 
 	render: =>
-		if typeof(@model.get 'username') == "undefined"
-			renderedContent = JST['login'] @model.toJSON()
+		if @model.get('username')?
+			renderedContent = JST['user'] @model.toJSON()
 		else
-			renderedContent =  JST['user'] @model.toJSON()
+			renderedContent =  JST['login'] @model.toJSON()
 
 		$(@el).html renderedContent
 		return this

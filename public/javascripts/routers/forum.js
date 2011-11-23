@@ -23,6 +23,12 @@
       return forum.postList = new forum.PostList();
     };
 
+    ForumRouter.prototype.home = function() {
+      var $container;
+      $container = $("#container");
+      return $container.empty();
+    };
+
     ForumRouter.prototype.posts = function() {
       var $container;
       $container = $('#container');

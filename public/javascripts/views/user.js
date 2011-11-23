@@ -26,10 +26,10 @@
 
     UserView.prototype.render = function() {
       var renderedContent;
-      if (typeof (this.model.get('username')) === "undefined") {
-        renderedContent = JST['login'](this.model.toJSON());
-      } else {
+      if (this.model.get('username') != null) {
         renderedContent = JST['user'](this.model.toJSON());
+      } else {
+        renderedContent = JST['login'](this.model.toJSON());
       }
       $(this.el).html(renderedContent);
       return this;
