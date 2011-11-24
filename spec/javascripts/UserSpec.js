@@ -9,7 +9,6 @@ userResponse = "{\"created_at\":\"2011-11-18T23:35:07Z\",\"id\":1,\"updated_at\"
 
 describe("user", function() {
   beforeEach(function() {
-    forum.app = new forum.ForumRouter();
     return forum.currentUser.set({});
   });
   describe("when not logged in", function() {

@@ -67,10 +67,8 @@ describe("post", function() {
   });
   return describe("post list view", function() {
     beforeEach(function() {
-      forum.app = new forum.ForumRouter();
       forum.postList.reset(postData);
       forum.currentUser.set(userData);
-      forum.app.navigate('', true);
       return forum.app.navigate('postlist', true);
     });
     it("creates a postList collection", function() {

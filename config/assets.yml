@@ -2,8 +2,9 @@ package_assets:         on          # (on, off, always)
 embed_assets:           off         # (on, off, datauri)
 compress_assets:        on          # (on, off)
 gzip_assets:            on          # (on, off)
-template_function:      _.template  # (defaults to the built-in micro-templating)
-# package_path:           packages    # (defaults to assets)
+template_function:      Haml        # (defaults to the built-in micro-templating)
+template_extension:     jst.haml    # (defaults to jst)
+# package_path:         packages    # (defaults to assets)
 javascript_compressor:  yui         # (yui, closure)
 # compressor_options:
 #  compilation_level: ADVANCED_OPTIMIZATIONS
@@ -13,15 +14,17 @@ javascripts:
     - public/javascripts/vendor/jquery.js
     - public/javascripts/vendor/underscore.js
     - public/javascripts/vendor/backbone.js
+    - public/javascripts/vendor/haml.js
     - public/javascripts/forum.js
     - public/javascripts/models/*.js
     - public/javascripts/collections/*.js
     - public/javascripts/views/*.js
     - public/javascripts/routers/*.js
-    - app/templates/**/*.jst
+    - app/templates/**/*.jst.haml
 
 stylesheets:
   common:
   workspace:
+    - public/stylesheets/bootstrap.min.css
     - public/stylesheets/forum.css
   empty:

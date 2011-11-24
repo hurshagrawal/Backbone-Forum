@@ -6,7 +6,6 @@ userResponse = "{\"created_at\":\"2011-11-18T23:35:07Z\",\"id\":1,\"updated_at\"
 
 describe "user", ->
 	beforeEach ->
-		forum.app = new forum.ForumRouter()
 		forum.currentUser.set {}
 
 	describe "when not logged in", ->
@@ -35,7 +34,6 @@ describe "user", ->
 			form.find('.pw').val userData.password
 			form.find('#signup-button').click()
 
-
 			@server.respondWith [ 200,
 				"Content-Type": "application/json"
 			, userResponse ]
@@ -57,13 +55,4 @@ describe "user", ->
 			expect($('#topbar #signup-button').length).toBe 1
 
 	describe "logging in", ->
-
-
-
-
-
-
-
-
-
-
+		#TODO - fill this out for full coverage

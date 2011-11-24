@@ -9,3 +9,7 @@ beforeEach ->
 		postForm: _.template readFixtures('postForm.jst')
 		login: _.template readFixtures('login.jst')
 		user: _.template readFixtures('user.jst')
+
+	forum.app = new forum.ForumRouter()
+	forum.app.navigate '', true
+

@@ -1,12 +1,6 @@
 
   window.forum = {};
 
-  _.templateSettings = {
-    evaluate: /\{\{\{([\s\S]+?)\}\\}/g,
-    interpolate: /\{\{([\s\S]+?)\}\}/g,
-    escape: /\{\{\-([\s\S]+?)\}\}/g
-  };
-
   $(function() {
     return $.ajaxSetup({
       beforeSend: function(xhr) {
