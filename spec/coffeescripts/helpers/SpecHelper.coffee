@@ -4,11 +4,11 @@ beforeEach ->
 	setFixtures '<div id="topbar"></div><div id="container"></div>'
 
 	window.JST =
-		post: _.template readFixtures('post.jst')
-		postList: _.template readFixtures('postList.jst')
-		postForm: _.template readFixtures('postForm.jst')
-		login: _.template readFixtures('login.jst')
-		user: _.template readFixtures('user.jst')
+		post: Haml readFixtures('post.jst.haml')
+		postList: Haml readFixtures('postList.jst.haml')
+		postForm: Haml readFixtures('postForm.jst.haml')
+		login: Haml readFixtures('login.jst.haml')
+		user: Haml readFixtures('user.jst.haml')
 
 	forum.app = new forum.ForumRouter()
 	forum.app.navigate '', true
