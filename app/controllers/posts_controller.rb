@@ -33,12 +33,7 @@ class PostsController < ApplicationController
 
 	# POST /posts.json
 	def create
-		postEntry = {
-			:user_id => User.where(:username => params[:username]).first.id,
-			:content => params[:content]
-		}
-
-		@post = Post.new postEntry
+		@post = Post.new params[:post]
 
 		if @post.save
 			respond_with @post

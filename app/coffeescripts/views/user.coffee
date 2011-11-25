@@ -6,6 +6,7 @@ class forum.UserView extends Backbone.View
 		'click #signup-button': 'signup'
 		'click #login-button': 'login'
 		'click #logout-button': 'logout'
+		'click #new-room-button': 'showNewForm'
 
 	initialize: ->
 		@model.bind 'change', @render
@@ -52,4 +53,10 @@ class forum.UserView extends Backbone.View
 		$.post '/sessions', { '_method': 'delete' }, (response) =>
 			@model.clear()
 
+	showNewForm: =>
+		forum.newRoomView = new forum.NewRoomView
+			collection: forum.roomList
+			model: forum.currentUser
+
+		$('#container').empty().append forum.newRoomView.render().el
 

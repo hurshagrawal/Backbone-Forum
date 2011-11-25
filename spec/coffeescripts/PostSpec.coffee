@@ -57,7 +57,7 @@ describe "post", ->
 
 		it "creates a postList View with the correct template", ->
 			#assumes the template has the header tag
-			headerArr = $(forum.postListView.el).find 'header'
+			headerArr = $(forum.postListView.el).find '.header'
 			expect(headerArr.length).toNotBe 0
 
 		it "creates a postList View with the right amount of posts", ->

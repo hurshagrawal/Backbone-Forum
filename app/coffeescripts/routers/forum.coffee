@@ -8,10 +8,11 @@ class forum.ForumRouter extends Backbone.Router
 		forum.currentUser = new forum.User()
 		forum.currentUserView = new forum.UserView
 			model: forum.currentUser
-		$('#topbar').append forum.currentUserView.render().el
+		$('#topbar').append(forum.currentUserView.render().el)
 
 		#makes and renders list of posts
 		forum.postList = new forum.PostList()
+		forum.roomList = new forum.RoomList()
 
 	home: ->
 		$container = $("#container")

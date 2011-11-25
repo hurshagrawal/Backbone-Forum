@@ -6,6 +6,7 @@
     __extends(UserView, Backbone.View);
 
     function UserView() {
+      this.showNewForm = __bind(this.showNewForm, this);
       this.render = __bind(this.render, this);
       UserView.__super__.constructor.apply(this, arguments);
     }
@@ -17,7 +18,8 @@
     UserView.prototype.events = {
       'click #signup-button': 'signup',
       'click #login-button': 'login',
-      'click #logout-button': 'logout'
+      'click #logout-button': 'logout',
+      'click #new-room-button': 'showNewForm'
     };
 
     UserView.prototype.initialize = function() {
@@ -83,6 +85,14 @@
       }, function(response) {
         return _this.model.clear();
       });
+    };
+
+    UserView.prototype.showNewForm = function() {
+      forum.newRoomView = new forum.NewRoomView({
+        collection: forum.roomList,
+        model: forum.currentUser
+      });
+      return $('#container').empty().append(forum.newRoomView.render().el);
     };
 
     return UserView;

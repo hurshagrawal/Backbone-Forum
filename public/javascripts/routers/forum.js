@@ -20,7 +20,8 @@
         model: forum.currentUser
       });
       $('#topbar').append(forum.currentUserView.render().el);
-      return forum.postList = new forum.PostList();
+      forum.postList = new forum.PostList();
+      return forum.roomList = new forum.RoomList();
     };
 
     ForumRouter.prototype.home = function() {
