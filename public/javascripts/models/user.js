@@ -9,7 +9,7 @@
       User.__super__.constructor.apply(this, arguments);
     }
 
-    User.prototype.url = '/users';
+    User.prototype.url = '/db/users';
 
     return User;
 

@@ -22,11 +22,11 @@
     PostFormView.prototype.initialize = function() {
       this.collection.bind('reset', this.render);
       this.collection.bind('add', this.render);
-      return this.model.bind('change', this.render);
+      return forum.currentUser.bind('change', this.render);
     };
 
     PostFormView.prototype.render = function() {
-      if (this.model.get('username') != null) {
+      if (forum.currentUser.get('username') != null) {
         $(this.el).html(JST['postForm']());
       } else {
         $(this.el).html('');
@@ -36,9 +36,21 @@
     };
 
     PostFormView.prototype.submit = function() {
-      return this.collection.create({
-        username: this.model.get('username'),
-        content: this.$('textarea').val()
+      var post;
+      var _this = this;
+      return post = this.collection.create({
+        post: {
+          room_id: this.model.id,
+          user_id: forum.currentUser.get('id'),
+          content: this.$('textarea').val()
+        }
+      }, {
+        success: function() {
+          forum.postList.add(post);
+          return post.set({
+            username: forum.currentUser.get('username')
+          });
+        }
       });
     };
 

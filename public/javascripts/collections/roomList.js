@@ -11,7 +11,7 @@
 
     RoomList.prototype.model = forum.Room;
 
-    RoomList.prototype.url = '/rooms';
+    RoomList.prototype.url = '/db/rooms';
 
     return RoomList;
 

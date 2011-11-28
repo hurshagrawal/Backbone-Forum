@@ -1,14 +1,12 @@
 Forum::Application.routes.draw do
 
+	scope "db", :as => "db" do
+	  resources :rooms, :posts, :users, :sessions
+		match 'sessions' => 'sessions#destroy', :via => [:delete]
+	end
+
 	root :to => "statics#index"
-
-	resources :rooms
-	resources :posts
-	resources :users
-	resources :sessions
-	match 'sessions' => 'sessions#destroy', :via => [:delete]
-
-	match ':wild' => 'statics#index'
+	match 'show/*wild' => 'statics#index'
 
 	# The priority is based upon order of creation:
 	# first created -> highest priority.

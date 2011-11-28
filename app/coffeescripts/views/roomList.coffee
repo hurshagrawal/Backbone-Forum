@@ -1,6 +1,6 @@
-class forum.PostListView extends Backbone.View
+class forum.RoomListView extends Backbone.View
 	tagName: 'section'
-	className: 'post-list'
+	className: 'rooms'
 
 	initialize: ->
 		#causes the view to render whenever the collection's data is loaded
@@ -8,16 +8,14 @@ class forum.PostListView extends Backbone.View
 		@collection.bind 'add', @render
 
 	render: =>
-		$(@el).html JST['postList']
-			topic: @model.get 'topic'
-		$postList = this.$('.post-list')
+		$(@el).html JST['roomList']()
+		$postList = this.$('.room-list')
 
 		#iterates through posts, renders, appends to <ul>
-		@collection.each (post) =>
-			view = new forum.PostView
-				model: post
+		@collection.each (room) =>
+			view = new forum.RoomListRoomView
+				model: room
 				collection: @collection
 			$postList.append view.render().el
 
 		return this
-

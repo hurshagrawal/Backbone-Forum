@@ -31,24 +31,29 @@
       var _this = this;
       return room = this.collection.create({
         room: {
-          user_id: this.model.get('id'),
+          user_id: forum.currentUser.get('id'),
           topic: this.$('.topic-text').val()
         }
       }, {
         success: function() {
           var post;
+          room.set({
+            username: forum.currentUser.get('username')
+          });
           room.collection = new forum.PostList();
           return post = room.collection.create({
             post: {
               room_id: room.get('id'),
-              user_id: _this.model.get('id'),
+              user_id: forum.currentUser.get('id'),
               content: _this.$('.post-text').val()
             }
           }, {
             success: function() {
-              return post.set({
-                username: _this.model.get('username')
+              forum.postList.add(post);
+              post.set({
+                username: forum.currentUser.get('username')
               });
+              return forum.app.navigate("show/room/" + (room.get('id')), true);
             }
           });
         }

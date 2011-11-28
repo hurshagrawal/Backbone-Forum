@@ -11,36 +11,56 @@
 
     ForumRouter.prototype.routes = {
       '': 'home',
-      'postlist': 'posts'
+      'show/room/:room_id': 'showRoom',
+      'show/new': 'showNew'
     };
 
     ForumRouter.prototype.initialize = function() {
       forum.currentUser = new forum.User();
-      forum.currentUserView = new forum.UserView({
-        model: forum.currentUser
-      });
-      $('#topbar').append(forum.currentUserView.render().el);
+      forum.navigation = new forum.Navigation();
+      $('#topbar').append(forum.navigation.render().el);
       forum.postList = new forum.PostList();
       return forum.roomList = new forum.RoomList();
     };
 
     ForumRouter.prototype.home = function() {
-      var $container;
-      $container = $("#container");
-      return $container.empty();
+      return $(function() {
+        var $container;
+        $container = $("#container");
+        forum.roomListView = new forum.RoomListView({
+          collection: forum.roomList
+        });
+        return $container.empty().append(forum.roomListView.render().el);
+      });
     };
 
-    ForumRouter.prototype.posts = function() {
-      var $container;
-      $container = $('#container');
-      forum.postListView = new forum.PostListView({
-        collection: forum.postList
+    ForumRouter.prototype.showRoom = function(room_id) {
+      return $(function() {
+        var $container, postList, room;
+        var _this = this;
+        $container = $('#container');
+        room = forum.roomList.get(room_id);
+        postList = forum.postList.select(function(entry) {
+          return entry.get('room_id') === room.get('id');
+        });
+        room.collection = new forum.PostList(postList);
+        forum.postListView = new forum.PostListView({
+          collection: room.collection,
+          model: room
+        });
+        forum.postFormView = new forum.PostFormView({
+          collection: room.collection,
+          model: room
+        });
+        return $container.empty().append(forum.postListView.render().el).append(forum.postFormView.render().el);
       });
-      forum.postFormView = new forum.PostFormView({
-        collection: forum.postList,
-        model: forum.currentUser
+    };
+
+    ForumRouter.prototype.showNew = function() {
+      forum.newRoomView = new forum.NewRoomView({
+        collection: forum.roomList
       });
-      return $container.empty().append(forum.postListView.render().el).append(forum.postFormView.render().el);
+      return $('#container').empty().append(forum.newRoomView.render().el);
     };
 
     return ForumRouter;

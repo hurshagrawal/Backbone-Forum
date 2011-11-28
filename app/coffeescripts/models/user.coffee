@@ -1,2 +1,2 @@
 class forum.User extends Backbone.Model
-	url: '/users'
+	url: '/db/users'

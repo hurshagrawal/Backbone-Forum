@@ -22,7 +22,9 @@
     PostListView.prototype.render = function() {
       var $postList;
       var _this = this;
-      $(this.el).html(JST['postList']());
+      $(this.el).html(JST['postList']({
+        topic: this.model.get('topic')
+      }));
       $postList = this.$('.post-list');
       this.collection.each(function(post) {
         var view;

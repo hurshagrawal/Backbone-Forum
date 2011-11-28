@@ -11,19 +11,19 @@ class PostsController < ApplicationController
 			}
 		end
 
-		respond_with @posts
+		respond_with "db", @posts
 	end
 
 	# GET /posts/1.json
 	def show
 		@post = Post.find(params[:id])
-		respond_with @post
+		respond_with "db", @post
 	end
 
 	# GET /posts/new.json
 	def new
 		@post = Post.new
-		respond_with @post
+		respond_with "db", @post
 	end
 
 	# GET /posts/1/edit
@@ -36,9 +36,9 @@ class PostsController < ApplicationController
 		@post = Post.new params[:post]
 
 		if @post.save
-			respond_with @post
+			respond_with "db", @post
 		else
-			respond_with @post, :status => :unprocessable_entity
+			respond_with "db", @post, :status => :unprocessable_entity
 		end
 	end
 
@@ -47,9 +47,9 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])
 
 		if @post.update_attributes(params[:post])
-			respond_with @post
+			respond_with "db", @post
 		else
-			respond_with @post, :status => :unprocessable_entity
+			respond_with "db", @post, :status => :unprocessable_entity
 		end
 	end
 
@@ -58,6 +58,6 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])
 		@post.destroy
 
-		respond_width { head :ok }
+		respond_with { head :ok }
 	end
 end

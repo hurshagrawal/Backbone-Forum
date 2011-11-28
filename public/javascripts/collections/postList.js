@@ -11,7 +11,7 @@
 
     PostList.prototype.model = forum.Post;
 
-    PostList.prototype.url = '/posts';
+    PostList.prototype.url = '/db/posts';
 
     return PostList;
 

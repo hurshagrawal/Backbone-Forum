@@ -40,7 +40,7 @@ class forum.UserView extends Backbone.View
 			username: this.$('.un').val()
 			password: this.$('.pw').val()
 
-		$.post '/sessions', data, (response) =>
+		$.post '/db/sessions', data, (response) =>
 			if response.exists == true
 				@model.set response.user
 			else if response.exists == false
@@ -50,13 +50,9 @@ class forum.UserView extends Backbone.View
 				this.$('.alert-text').html 'There was some sort of error. Try again.'
 
 	logout: ->
-		$.post '/sessions', { '_method': 'delete' }, (response) =>
+		$.post '/db/sessions', { '_method': 'delete' }, (response) =>
 			@model.clear()
 
 	showNewForm: =>
-		forum.newRoomView = new forum.NewRoomView
-			collection: forum.roomList
-			model: forum.currentUser
-
-		$('#container').empty().append forum.newRoomView.render().el
+		forum.app.navigate 'show/new', true
 

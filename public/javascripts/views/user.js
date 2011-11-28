@@ -66,7 +66,7 @@
         username: this.$('.un').val(),
         password: this.$('.pw').val()
       };
-      return $.post('/sessions', data, function(response) {
+      return $.post('/db/sessions', data, function(response) {
         if (response.exists === true) {
           return _this.model.set(response.user);
         } else if (response.exists === false) {
@@ -80,7 +80,7 @@
 
     UserView.prototype.logout = function() {
       var _this = this;
-      return $.post('/sessions', {
+      return $.post('/db/sessions', {
         '_method': 'delete'
       }, function(response) {
         return _this.model.clear();
@@ -88,11 +88,7 @@
     };
 
     UserView.prototype.showNewForm = function() {
-      forum.newRoomView = new forum.NewRoomView({
-        collection: forum.roomList,
-        model: forum.currentUser
-      });
-      return $('#container').empty().append(forum.newRoomView.render().el);
+      return forum.app.navigate('show/new', true);
     };
 
     return UserView;

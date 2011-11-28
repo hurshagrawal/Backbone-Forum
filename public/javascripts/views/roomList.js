@@ -30,7 +30,7 @@
           model: room,
           collection: _this.collection
         });
-        return $roomList.append(view.render().el);
+        return $postList.append(view.render().el);
       });
       return this;
     };

@@ -4,19 +4,19 @@ class RoomsController < ApplicationController
 	# GET /rooms.json
 	def index
 		@rooms = Room.all
-		respond_with @rooms
+		respond_with "db", @rooms
 	end
 
 	# GET /rooms/1.json
 	def show
 		@room = Room.find(params[:id])
-		respond_with @room
+		respond_with "db", @room
 	end
 
 	# GET /rooms/new.json
 	def new
 		@room = Room.new
-		respond_with @room
+		respond_with "db", @room
 	end
 
 	# GET /rooms/1/edit
@@ -29,9 +29,9 @@ class RoomsController < ApplicationController
 		@room = Room.new(params[:room])
 
 		if @room.save
-			respond_with @room
+			respond_with "db", @room
 		else
-			respond_with @room, :status => :unprocessable_entity
+			respond_with "db", @room, :status => :unprocessable_entity
 		end
 	end
 
@@ -40,9 +40,9 @@ class RoomsController < ApplicationController
 		@room = Room.find(params[:id])
 
 		if @room.update_attributes(params[:room])
-			respond_with @room
+			respond_with "db", @room
 		else
-			respond_with @room, :status => :unprocessable_entity
+			respond_with "db", @room, :status => :unprocessable_entity
 		end
 	end
 
