@@ -21,3 +21,4 @@ class forum.Navigation extends Backbone.View
 
 	showHome: =>
 		forum.app.navigate '', true
+

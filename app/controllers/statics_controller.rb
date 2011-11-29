@@ -1,8 +1,8 @@
 class StaticsController < ApplicationController
 
 	def index
-		@posts = get_json Post.all
-		@rooms = get_json Room.all
+		@posts = get_post_json
+		@rooms = get_room_json
 
 		@current_user_json = @current_user ? ActiveSupport::JSON.encode(@current_user) : '{}'
 
@@ -11,9 +11,16 @@ class StaticsController < ApplicationController
 
 	private
 
-	def get_json(records)
-		hash_arr = records.map { |r| r.attributes.merge({:username => r.user.username}) }
+	def get_post_json
+		hash_arr = Post.all.map { |p| p.attributes.merge({:username => p.user.username}) }
 		return ActiveSupport::JSON.encode hash_arr
 	end
 
+	def get_room_json
+		hash_arr = Room.all.map do |r|
+			r.attributes.merge :username => r.user.username, :participants => r.participants
+		end
+
+		return ActiveSupport::JSON.encode hash_arr
+	end
 end

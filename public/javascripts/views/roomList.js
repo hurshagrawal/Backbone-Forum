@@ -12,7 +12,7 @@
 
     RoomListView.prototype.tagName = 'section';
 
-    RoomListView.prototype.className = 'rooms';
+    RoomListView.prototype.className = 'rooms span10';
 
     RoomListView.prototype.initialize = function() {
       this.collection.bind('reset', this.render);

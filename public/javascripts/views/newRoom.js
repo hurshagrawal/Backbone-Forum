@@ -27,12 +27,18 @@
     };
 
     NewRoomView.prototype.submit = function() {
-      var room;
+      var postText, room, topicText;
       var _this = this;
+      topicText = this.$('.topic-text').val().trim();
+      postText = this.$('.post-text').val().trim();
+      $('.error').removeClass('error');
+      if (topicText === "") this.$('.topic-text').addClass('error');
+      if (postText === "") this.$('.post-text').addClass('error');
+      if (topicText === "" || postText === "") return;
       return room = this.collection.create({
         room: {
           user_id: forum.currentUser.get('id'),
-          topic: this.$('.topic-text').val()
+          topic: topicText
         }
       }, {
         success: function() {
@@ -45,7 +51,7 @@
             post: {
               room_id: room.get('id'),
               user_id: forum.currentUser.get('id'),
-              content: _this.$('.post-text').val()
+              content: postText
             }
           }, {
             success: function() {

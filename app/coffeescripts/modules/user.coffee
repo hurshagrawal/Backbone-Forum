@@ -1,3 +1,10 @@
+class forum.User extends Backbone.Model
+	url: '/db/users'
+
+###
+#	User login/signup/create a new roundtable link in topbar
+#
+###
 class forum.UserView extends Backbone.View
 	tagName: 'span'
 	className: 'user-panel pull-right'
@@ -52,6 +59,7 @@ class forum.UserView extends Backbone.View
 	logout: ->
 		$.post '/db/sessions', { '_method': 'delete' }, (response) =>
 			@model.clear()
+		forum.app.navigate '', true
 
 	showNewForm: =>
 		forum.app.navigate 'show/new', true

@@ -6,6 +6,16 @@
 	user-select: none;
 }
 
+.error {
+	border-color: #E9322D;
+	-webkit-box-shadow: 0 0 6px #f8b9b7;
+	-moz-box-shadow: 0 0 6px #f8b9b7;
+	box-shadow: 0 0 6px #f8b9b7;
+}
+
+body {
+	background: #F7F5F5 url(../images/paper.jpg) repeat;
+}
 
 .topbar {
 
@@ -14,7 +24,7 @@
 	.topbar .brand {
 		font-family: Raleway;
 		font-size: 24px;
-		padding: 5px 10px 5px 0px;
+		padding: 5px 10px 5px 20px;
 	}
 
 		.topbar .brand:hover {
@@ -41,7 +51,6 @@
 	}
 
 	.topbar .user-panel {
-		padding-right: 20px;
 	}
 
 		.topbar .user-panel .user-text {
@@ -54,7 +63,7 @@
 		}
 
 		.topbar .user-panel .btn {
-			margin-right: 5px;
+			margin-left: 5px;
 		}
 
 		.topbar input {
@@ -65,27 +74,59 @@
 
 #container {
 	margin-top: 50px;
-}
-.post-list h2 {
-	margin-left: 100px;
+	margin-bottom: 125px;
 }
 
-li.post {
-	list-style: none;
-	outline: 1px black solid;
-	width: 400px;
+#container section {
 	padding: 15px;
-	margin: 20px 0px;
+	background-color: white;
+	box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-moz-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+	-webkit-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
 }
+
+	#container section h2 {
+		font-family: Raleway;
+		font-size: 30px;
+		font-weight: 100;
+	}
+
+	#container section ul {
+		margin: 15px 0 0 0;
+	}
+
+		#container section ul li.post {
+			list-style: none;
+			position: relative;
+			left: -15px;
+			padding: 15px;
+			margin: -1px 0px;
+			border-top: grey solid 1px;
+			border-bottom: grey solid 1px;
+			cursor: pointer;
+		}
+
+		#container section ul li.post:first-child {
+			border-top: none;
+		}
+
+		#container section ul li.post:last-child {
+			border-bottom: none;
+		}
+
+		#container section ul li.post:hover {
+			background-color: #EEE;
+		}
+
+		#container section ul li.post:active {
+			background-color: #DDD;
+		}
 
 li.post .user {
-	line-height: 20px;
 }
 
 li.post .content {
-	color: black;
-	padding-top: 2px;
-	margin-left: 10px;
+
 }
 
 .post-form {

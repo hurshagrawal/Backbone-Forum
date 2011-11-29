@@ -16,9 +16,7 @@ javascripts:
     - public/javascripts/vendor/backbone.js
     - public/javascripts/vendor/haml.js
     - public/javascripts/forum.js
-    - public/javascripts/models/*.js
-    - public/javascripts/collections/*.js
-    - public/javascripts/views/*.js
+    - public/javascripts/modules/*.js
     - public/javascripts/routers/*.js
     - app/templates/**/*.jst.haml
 

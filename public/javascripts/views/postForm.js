@@ -36,13 +36,19 @@
     };
 
     PostFormView.prototype.submit = function() {
-      var post;
+      var content, post;
       var _this = this;
+      if (forum.currentUser.get('username') == null) return;
+      content = this.$('textarea').val().trim();
+      if (content === "") {
+        this.$('textarea').addClass('error');
+        return;
+      }
       return post = this.collection.create({
         post: {
           room_id: this.model.id,
           user_id: forum.currentUser.get('id'),
-          content: this.$('textarea').val()
+          content: content
         }
       }, {
         success: function() {

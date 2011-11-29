@@ -13,7 +13,7 @@
 
     RoomListRoomView.prototype.tagName = 'li';
 
-    RoomListRoomView.prototype.className = 'post';
+    RoomListRoomView.prototype.className = 'post span10';
 
     RoomListRoomView.prototype.events = {
       'click .go': 'showRoom'

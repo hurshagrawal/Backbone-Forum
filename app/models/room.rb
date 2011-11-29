@@ -4,5 +4,7 @@ class Room < ActiveRecord::Base
 
 	has_many :posts
 
-
+	def participants
+		posts.map {|p| p.user.username }.uniq
+	end
 end
