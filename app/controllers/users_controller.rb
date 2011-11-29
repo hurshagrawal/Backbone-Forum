@@ -4,19 +4,19 @@ class UsersController < ApplicationController
 	# GET /users.json
 	def index
 		@users = User.all
-		respond_with @users
+		respond_with "db", @users
 	end
 
 	# GET /users/1.json
 	def show
 		@user = User.find(params[:id])
-		respond_with @user
+		respond_with "db", @user
 	end
 
 	# GET /users/new.json
 	def new
 		@user = User.new
-		respond_with @user
+		respond_with "db", @user
 	end
 
 	# POST /users.json
@@ -30,9 +30,9 @@ class UsersController < ApplicationController
 
 		if @user.save
 			session[:user_id] = @user.id
-			respond_with @user
+			respond_with "db", @user
 		else
-			respond_with @user, :status => :unprocessable_entity
+			respond_with "db", @user, :status => :unprocessable_entity
 		end
 	end
 
@@ -41,9 +41,9 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 
 		if @user.update_attributes(params[:user])
-			respond_with @user
+			respond_with "db", @user
 		else
-			respond_with @user, :status => :unprocessable_entity
+			respond_with "db", @user, :status => :unprocessable_entity
 		end
 	end
 

@@ -20,12 +20,33 @@ class forum.RoomListRoomView extends Backbone.View
 		@model.bind 'change', @render
 
 	render: =>
-		renderedContent = JST['roomListRoom'] this.model.toJSON()
+		modelObj = @model.toJSON()
+		modelObj.subheading = @toSentence modelObj.participants
+		modelObj.dateStr = @toDateString modelObj.created_at
+
+		renderedContent = JST['roomListRoom'] modelObj
 		$(@el).html renderedContent
 		return this
 
 	showRoom: =>
 		forum.app.navigate "show/room/#{@model.get('id')}", true
+
+	toSentence: (arr) ->
+		console.log arr.length
+		return "with #{arr[0]}" if arr.length is 1
+		console.log "one"
+		return "between #{arr.join(" and ")}" if arr.length is 2
+		console.log "two"
+
+		lastEntry = arr.splice arr.length - 1
+		return "between #{arr.join(', ')}, and #{lastEntry}"
+
+	toDateString: (dateStr) ->
+		date = new Date(dateStr)
+		str = "#{date.getHours()}:#{date.getMinutes()} "
+		str += "#{date.getDate()}/#{date.getMonth()}/"
+		str += "#{date.getFullYear().toString().substr(2,2)}"
+		return str
 
 ###
 #	View for room list on main page

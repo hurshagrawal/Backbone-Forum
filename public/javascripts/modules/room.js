@@ -57,14 +57,37 @@
     };
 
     RoomListRoomView.prototype.render = function() {
-      var renderedContent;
-      renderedContent = JST['roomListRoom'](this.model.toJSON());
+      var modelObj, renderedContent;
+      modelObj = this.model.toJSON();
+      modelObj.subheading = this.toSentence(modelObj.participants);
+      modelObj.dateStr = this.toDateString(modelObj.created_at);
+      renderedContent = JST['roomListRoom'](modelObj);
       $(this.el).html(renderedContent);
       return this;
     };
 
     RoomListRoomView.prototype.showRoom = function() {
       return forum.app.navigate("show/room/" + (this.model.get('id')), true);
+    };
+
+    RoomListRoomView.prototype.toSentence = function(arr) {
+      var lastEntry;
+      console.log(arr.length);
+      if (arr.length === 1) return "with " + arr[0];
+      console.log("one");
+      if (arr.length === 2) return "between " + (arr.join(" and "));
+      console.log("two");
+      lastEntry = arr.splice(arr.length - 1);
+      return "between " + (arr.join(', ')) + ", and " + lastEntry;
+    };
+
+    RoomListRoomView.prototype.toDateString = function(dateStr) {
+      var date, str;
+      date = new Date(dateStr);
+      str = "" + (date.getHours()) + ":" + (date.getMinutes()) + " ";
+      str += "" + (date.getDate()) + "/" + (date.getMonth()) + "/";
+      str += "" + (date.getFullYear().toString().substr(2, 2));
+      return str;
     };
 
     return RoomListRoomView;

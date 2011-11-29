@@ -92,7 +92,18 @@ class forum.PostFormView extends Backbone.View
 				content: content
 		,
 			success: =>
+				#adds post to global post list
 				forum.postList.add post
+
+				username = forum.currentUser.get 'username'
+				#for rendering the username on posts
 				post.set
-					username: forum.currentUser.get 'username'
+					username: username
+
+				#for rendering username on rooms
+				userArr = @model.get 'participants'
+				unless _.include(userArr, username)
+					userArr.push username
+					@model.set
+						participants: userArr
 

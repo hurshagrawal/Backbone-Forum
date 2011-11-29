@@ -104,6 +104,7 @@ body {
 			border-top: grey solid 1px;
 			border-bottom: grey solid 1px;
 			cursor: pointer;
+			height: 70px;
 		}
 
 		#container section ul li.post:first-child {
@@ -122,11 +123,22 @@ body {
 			background-color: #DDD;
 		}
 
-li.post .user {
-}
+			#container section ul li.post .topic {
+				font-family: Raleway;
+				font-weight: inherit;
+				font-size: 25px;
+				padding: 5px;
+			}
 
-li.post .content {
+			#container section ul li.post .users {
+ 				padding: 10px 20px;
+				font-size: 15px;
+				font-weight: 300;
+			}
 
+			#container section ul li.post .created {
+				float: right;
+				padding: 5px;
 }
 
 .post-form {

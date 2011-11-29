@@ -163,10 +163,19 @@
         }
       }, {
         success: function() {
+          var userArr, username;
           forum.postList.add(post);
-          return post.set({
-            username: forum.currentUser.get('username')
+          username = forum.currentUser.get('username');
+          post.set({
+            username: username
           });
+          userArr = _this.model.get('participants');
+          if (!_.include(userArr, username)) {
+            userArr.push(username);
+            return _this.model.set({
+              participants: userArr
+            });
+          }
         }
       });
     };
