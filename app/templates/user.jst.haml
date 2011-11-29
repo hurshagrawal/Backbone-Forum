@@ -1,5 +1,8 @@
-.user-text Welcome, #{username}
-%button#logout-button.btn Logout
-
-.li
-	%button#new-room-button.btn Create a Roundtable
+%ul.nav
+  %li#new-room-button
+    .link Create a Roundtable
+  %li
+    .divider
+%form
+  %span.user-text Welcome, #{username}
+  #logout-button.btn Logout

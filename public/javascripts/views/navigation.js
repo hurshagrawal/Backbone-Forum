@@ -11,9 +11,9 @@
       Navigation.__super__.constructor.apply(this, arguments);
     }
 
-    Navigation.prototype.tagName = 'section';
+    Navigation.prototype.tagName = 'div';
 
-    Navigation.prototype.className = 'navigation';
+    Navigation.prototype.className = 'navigation fill';
 
     Navigation.prototype.events = {
       'click .home': 'showHome'
@@ -27,8 +27,10 @@
 
     Navigation.prototype.render = function() {
       var renderedContent;
-      renderedContent = JST['navigation']();
-      $(this.el).html(renderedContent).append(forum.currentUserView.render().el);
+      renderedContent = JST['navigation']({
+        user: forum.currentUser.get('username')
+      });
+      $(this.el).html(renderedContent).find('.container').append(forum.currentUserView.render().el);
       return this;
     };
 

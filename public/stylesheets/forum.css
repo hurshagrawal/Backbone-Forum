@@ -1,3 +1,71 @@
+.link, .btn, .brand {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+
+.topbar {
+
+}
+
+	.topbar .brand {
+		font-family: Raleway;
+		font-size: 24px;
+		padding: 5px 10px 5px 0px;
+	}
+
+		.topbar .brand:hover {
+			background-color: inherit;
+		}
+
+	.topbar div.link {
+		padding: 10px 10px 11px;
+		color: #BFBFBF;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+		cursor: pointer;
+	}
+
+		.topbar div.link:hover {
+			background: #222;
+			color: white;
+		}
+
+	.topbar .divider {
+		background-color: #444;
+		height: 27px;
+		margin: 4px 5px;
+		width: 1px;
+	}
+
+	.topbar .user-panel {
+		padding-right: 20px;
+	}
+
+		.topbar .user-panel .user-text {
+			font-family: Raleway;
+			font-size: 17px;
+			padding: 5px 12px 5px 0px;
+			color: grey;
+			position: relative;
+			top: 1px;
+		}
+
+		.topbar .user-panel .btn {
+			margin-right: 5px;
+		}
+
+		.topbar input {
+			height: 25px;
+			width: 200px;
+			margin: 0px 5px;
+		}
+
+#container {
+	margin-top: 50px;
+}
 .post-list h2 {
 	margin-left: 100px;
 }

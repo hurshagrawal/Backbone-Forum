@@ -1,6 +1,6 @@
 class forum.UserView extends Backbone.View
-	tagName: 'div'
-	className: 'user-panel'
+	tagName: 'span'
+	className: 'user-panel pull-right'
 
 	events:
 		'click #signup-button': 'signup'

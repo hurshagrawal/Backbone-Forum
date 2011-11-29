@@ -18,7 +18,7 @@
     ForumRouter.prototype.initialize = function() {
       forum.currentUser = new forum.User();
       forum.navigation = new forum.Navigation();
-      $('#topbar').append(forum.navigation.render().el);
+      $('.topbar').append(forum.navigation.render().el);
       forum.postList = new forum.PostList();
       return forum.roomList = new forum.RoomList();
     };

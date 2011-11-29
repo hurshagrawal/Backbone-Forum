@@ -118,7 +118,7 @@
         });
         return describe("failing submit", function() {
           beforeEach(function() {
-            console.log($('#container').html());
+            console.log($('.container').html());
             this.server.respondWith([404, {}, ""]);
             return this.server.respond();
           });

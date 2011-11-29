@@ -11,9 +11,9 @@
       UserView.__super__.constructor.apply(this, arguments);
     }
 
-    UserView.prototype.tagName = 'div';
+    UserView.prototype.tagName = 'span';
 
-    UserView.prototype.className = 'user-panel';
+    UserView.prototype.className = 'user-panel pull-right';
 
     UserView.prototype.events = {
       'click #signup-button': 'signup',

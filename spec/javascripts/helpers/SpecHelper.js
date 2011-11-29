@@ -1,7 +1,7 @@
 
 beforeEach(function() {
   jasmine.getFixtures().fixturesPath = '/app/templates/';
-  setFixtures('<div id="topbar"></div><div id="container"></div>');
+  setFixtures('<div class="topbar"></div><div id="container"></div>');
   window.JST = {
     post: Haml(readFixtures('post.jst.haml')),
     postList: Haml(readFixtures('postList.jst.haml')),

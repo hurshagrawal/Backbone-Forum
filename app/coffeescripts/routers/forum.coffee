@@ -10,7 +10,7 @@ class forum.ForumRouter extends Backbone.Router
 
 		#makes navigation
 		forum.navigation = new forum.Navigation()
-		$('#topbar').append forum.navigation.render().el
+		$('.topbar').append forum.navigation.render().el
 
 		#makes and renders list of posts
 		forum.postList = new forum.PostList()

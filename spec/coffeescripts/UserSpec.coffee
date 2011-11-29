@@ -20,7 +20,7 @@ describe "user", ->
 		describe "user view", ->
 
 			it "should exist", ->
-				userView = $('#topbar .user-panel')
+				userView = $('.topbar .user-panel')
 				expect(userView.length).toNotBe 0
 
 	describe "signing up", ->
@@ -44,15 +44,15 @@ describe "user", ->
 			@server.restore()
 
 		it "should switch to the logged in view when signing up", ->
-			expect($('#topbar #signup-button').length).toBe 0
+			expect($('.topbar #signup-button').length).toBe 0
 
 		it "should display the user view when signed up", ->
-			expect($('#topbar .user-text').length).toNotBe 0
+			expect($('.topbar .user-text').length).toNotBe 0
 
 		it "should log you out when you click logout", ->
 			$('#logout-button').click()
 			@server.respond()
-			expect($('#topbar #signup-button').length).toBe 1
+			expect($('.topbar #signup-button').length).toBe 1
 
 	describe "logging in", ->
 		#TODO - fill this out for full coverage

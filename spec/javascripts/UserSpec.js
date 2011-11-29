@@ -23,7 +23,7 @@ describe("user", function() {
     return describe("user view", function() {
       return it("should exist", function() {
         var userView;
-        userView = $('#topbar .user-panel');
+        userView = $('.topbar .user-panel');
         return expect(userView.length).toNotBe(0);
       });
     });
@@ -49,15 +49,15 @@ describe("user", function() {
       return this.server.restore();
     });
     it("should switch to the logged in view when signing up", function() {
-      return expect($('#topbar #signup-button').length).toBe(0);
+      return expect($('.topbar #signup-button').length).toBe(0);
     });
     it("should display the user view when signed up", function() {
-      return expect($('#topbar .user-text').length).toNotBe(0);
+      return expect($('.topbar .user-text').length).toNotBe(0);
     });
     return it("should log you out when you click logout", function() {
       $('#logout-button').click();
       this.server.respond();
-      return expect($('#topbar #signup-button').length).toBe(1);
+      return expect($('.topbar #signup-button').length).toBe(1);
     });
   });
   return describe("logging in", function() {});

@@ -1,6 +1,6 @@
 class forum.Navigation extends Backbone.View
-	tagName: 'section'
-	className: 'navigation'
+	tagName: 'div'
+	className: 'navigation fill'
 
 	events:
 		'click .home': 'showHome'
@@ -10,9 +10,11 @@ class forum.Navigation extends Backbone.View
 			model: forum.currentUser
 
 	render: =>
-		renderedContent =  JST['navigation']()
+		renderedContent =  JST['navigation']
+			user: forum.currentUser.get('username')
 
 		$(@el).html(renderedContent)
+					.find('.container')
 					.append(forum.currentUserView.render().el)
 
 		return this
