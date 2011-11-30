@@ -15,6 +15,7 @@ javascripts:
     - public/javascripts/vendor/underscore.js
     - public/javascripts/vendor/backbone.js
     - public/javascripts/vendor/haml.js
+    - public/javascripts/vendor/less-1.1.5.min.js
     - public/javascripts/forum.js
     - public/javascripts/modules/*.js
     - public/javascripts/routers/*.js
@@ -24,5 +25,4 @@ stylesheets:
   common:
   workspace:
     - public/stylesheets/bootstrap.min.css
-    - public/stylesheets/forum.css
   empty:

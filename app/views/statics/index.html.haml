@@ -1,10 +1,11 @@
 %html
 	%head
-		%title Backbone JS Forum
+		%title Roundtable
 		= csrf_meta_tag
-		= include_javascripts :workspace
 		= include_stylesheets :workspace
+		%link(rel="stylesheet/less" type="text/css" href="/stylesheets/forum.less")
 		%link(href='http://fonts.googleapis.com/css?family=Raleway:100' rel='stylesheet' type='text/css')
+		= include_javascripts :workspace
 		:javascript
 			$(function() {
 				forum.app = new forum.ForumRouter();
@@ -16,4 +17,4 @@
 			});
 	%body
 		.topbar
-		#container.container
+		#container.container.main

@@ -71,7 +71,7 @@
       if (forum.roomSideView != null) {
         return forum.sideRoom.set(this.model.toJSON());
       } else {
-        forum.sideRoom = new forum.Room();
+        forum.sideRoom = new forum.Room(this.model.toJSON());
         forum.roomSideView = new forum.RoomSideView({
           model: forum.sideRoom
         });
@@ -79,7 +79,7 @@
         elementWidth = $(forum.roomSideView.el).width();
         targetLeft = $('.side-bg').offset().left - 20 - elementWidth;
         $(forum.roomSideView.el).css('left', targetLeft);
-        return forum.roomSideView.trigger('slideIn');
+        return forum.roomSideView.trigger('slideOut');
       }
     };
 
@@ -114,13 +114,19 @@
     __extends(RoomSideView, Backbone.View);
 
     function RoomSideView() {
-      this.slideOut = __bind(this.slideOut, this);
+      this.showRoom = __bind(this.showRoom, this);
       this.slideIn = __bind(this.slideIn, this);
+      this.slideOut = __bind(this.slideOut, this);
       this.render = __bind(this.render, this);
       RoomSideView.__super__.constructor.apply(this, arguments);
     }
 
     RoomSideView.prototype.className = 'section sidebar span6';
+
+    RoomSideView.prototype.events = {
+      'click .close': 'slideIn',
+      'click .go': 'showRoom'
+    };
 
     RoomSideView.prototype.initialize = function() {
       this.model.bind('change', this.render);
@@ -130,22 +136,47 @@
 
     RoomSideView.prototype.render = function() {
       var modelObj, renderedContent;
+      var _this = this;
       modelObj = this.model.toJSON();
+      modelObj.posts = forum.postList.select(function(entry) {
+        return entry.get('room_id') === _this.model.get('id');
+      });
+      modelObj.firstPost = this.truncatePost(modelObj.posts[0].get('content'), 95);
+      modelObj.secondPost = this.truncatePost(modelObj.posts[1].get('content'), 35);
       renderedContent = JST['roomSideView'](modelObj);
       $(this.el).html(renderedContent);
+      if (this.displayed === false && this.displayed !== null) this.slideOut();
       return this;
     };
 
-    RoomSideView.prototype.slideIn = function() {
-      return $(this.el).animate({
+    RoomSideView.prototype.slideOut = function() {
+      $(this.el).css('visibility', 'visible').animate({
         left: "+=" + ($(this.el).width())
       }, 200);
+      return this.displayed = true;
     };
 
-    RoomSideView.prototype.slideOut = function() {
-      return $(this.el).animate({
+    RoomSideView.prototype.slideIn = function() {
+      var _this = this;
+      $(this.el).animate({
         left: "-=" + ($(this.el).width())
-      }, 200);
+      }, 200, function() {
+        return $(_this.el).css('visibility', 'hidden');
+      });
+      return this.displayed = false;
+    };
+
+    RoomSideView.prototype.showRoom = function() {
+      forum.app.navigate("show/room/" + (this.model.get('id')), true);
+      return forum.roomSideView = null;
+    };
+
+    RoomSideView.prototype.truncatePost = function(str, length) {
+      var arr;
+      if (str.length <= length) return str;
+      arr = str.substr(0, length).split(" ");
+      arr.splice(arr.length - 1, 1);
+      return arr.join(" ") + "...";
     };
 
     return RoomSideView;

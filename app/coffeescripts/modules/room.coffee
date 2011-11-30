@@ -25,13 +25,14 @@ class forum.RoomListRoomView extends Backbone.View
 
 		renderedContent = JST['roomListRoom'] modelObj
 		$(@el).html renderedContent
+
 		return this
 
 	showRoom: =>
 		if forum.roomSideView?
 			forum.sideRoom.set @model.toJSON()
 		else
-			forum.sideRoom = new forum.Room()
+			forum.sideRoom = new forum.Room @model.toJSON()
 			forum.roomSideView = new forum.RoomSideView
 				model: forum.sideRoom
 
@@ -40,9 +41,7 @@ class forum.RoomListRoomView extends Backbone.View
 			elementWidth = $(forum.roomSideView.el).width()
 			targetLeft = $('.side-bg').offset().left - 20 - elementWidth
 			$(forum.roomSideView.el).css 'left', targetLeft
-			forum.roomSideView.trigger 'slideIn'
-
-		# forum.app.navigate "show/room/#{@model.get('id')}", true
+			forum.roomSideView.trigger 'slideOut'
 
 	toSentence: (arr) ->
 		return "with #{arr[0]}" if arr.length is 1
@@ -65,6 +64,10 @@ class forum.RoomListRoomView extends Backbone.View
 class forum.RoomSideView extends Backbone.View
 	className: 'section sidebar span6'
 
+	events:
+		'click .close': 'slideIn'
+		'click .go': 'showRoom'
+
 	initialize: ->
 		@model.bind 'change', @render
 		this.bind 'slideIn', this.slideIn
@@ -72,16 +75,38 @@ class forum.RoomSideView extends Backbone.View
 
 	render: =>
 		modelObj = @model.toJSON()
+		modelObj.posts = forum.postList.select (entry) =>
+			entry.get('room_id') == @model.get('id')
+
+		modelObj.firstPost = @truncatePost(modelObj.posts[0].get('content'), 95)
+		modelObj.secondPost = @truncatePost(modelObj.posts[1].get('content'), 35)
+
+
 		renderedContent = JST['roomSideView'] modelObj
 		$(@el).html renderedContent
+		@slideOut() if @displayed == false and @displayed != null
 		return this
 
-	slideIn: =>
-		$(@el).animate { left: "+=#{$(@el).width()}" }, 200
-
 	slideOut: =>
-		$(@el).animate { left: "-=#{$(@el).width()}" }, 200
+		$(@el).css('visibility', 'visible')
+					.animate { left: "+=#{$(@el).width()}" }, 200
+		@displayed = true
 
+	slideIn: =>
+		$(@el).animate { left: "-=#{$(@el).width()}" }, 200, =>
+			$(@el).css 'visibility', 'hidden'
+		@displayed = false
+
+	showRoom: =>
+		forum.app.navigate "show/room/#{@model.get('id')}", true
+		forum.roomSideView = null
+
+	# truncates string but does not cut off mid-word
+	truncatePost: (str, length) ->
+		return str if str.length <= length
+		arr = str.substr(0, length).split(" ")
+		arr.splice arr.length - 1, 1
+		return arr.join(" ") + "..."
 
 ###
 #	View for room list on main page
