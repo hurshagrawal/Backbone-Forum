@@ -99,10 +99,33 @@ class forum.ForumRouter extends Backbone.Router
 			@toAnimate = true
 
 	showNew: ->
+		#animation preparation
+		if @toAnimate is true
+			$container = $('<div class="slide rightside"></div>')
+											.appendTo('.container.main')
+		else
+			$container = $("#container")
+
 		forum.newRoomView = new forum.NewRoomView
 			collection: forum.roomList
 
-		$('#container').empty().append forum.newRoomView.render().el
+		$container.append forum.newRoomView.render().el
+
+		#animation cleanup
+		if @toAnimate
+			#scrolls to top of page
+			$("html:not(:animated),body:not(:animated)")
+				.animate { scrollTop: 0 }, 200
+
+			$('.sidebar').addClass('slide').css('left', '-1500px')
+			$('.center').addClass('leftside').removeClass('center')
+																			 .removeAttr('id')
+			$('.rightside').attr('id', 'container')
+
+			window.setTimeout ->
+				$('.rightside').addClass('center').removeClass('rightside')
+			, 0
+			window.setTimeout (-> $('.leftside').remove()), 500
 
 		#animates transitions in the future
 		@toAnimate = true

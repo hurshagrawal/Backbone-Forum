@@ -96,10 +96,30 @@
     };
 
     ForumRouter.prototype.showNew = function() {
+      var $container;
+      if (this.toAnimate === true) {
+        $container = $('<div class="slide rightside"></div>').appendTo('.container.main');
+      } else {
+        $container = $("#container");
+      }
       forum.newRoomView = new forum.NewRoomView({
         collection: forum.roomList
       });
-      $('#container').empty().append(forum.newRoomView.render().el);
+      $container.append(forum.newRoomView.render().el);
+      if (this.toAnimate) {
+        $("html:not(:animated),body:not(:animated)").animate({
+          scrollTop: 0
+        }, 200);
+        $('.sidebar').addClass('slide').css('left', '-1500px');
+        $('.center').addClass('leftside').removeClass('center').removeAttr('id');
+        $('.rightside').attr('id', 'container');
+        window.setTimeout(function() {
+          return $('.rightside').addClass('center').removeClass('rightside');
+        }, 0);
+        window.setTimeout((function() {
+          return $('.leftside').remove();
+        }), 500);
+      }
       return this.toAnimate = true;
     };
 
