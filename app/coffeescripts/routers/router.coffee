@@ -35,12 +35,16 @@ class forum.ForumRouter extends Backbone.Router
 
 			# animation cleanup
 			if @toAnimate is true
+				#scrolls to top of page
+				$("html:not(:animated),body:not(:animated)")
+					.animate { scrollTop: 0 }, 200
+
 				$('.center').addClass('rightside').removeClass('center')
 																					.removeAttr('id')
 				$('.leftside').attr('id', 'container')
 
 				window.setTimeout ->
-					$('.leftside').addClass('center').removeClass('leftside'))
+					$('.leftside').addClass('center').removeClass('leftside')
 				, 0
 				window.setTimeout (-> $('.rightside').remove()), 500
 
@@ -77,13 +81,17 @@ class forum.ForumRouter extends Backbone.Router
 
 			#animation cleanup
 			if @toAnimate
+				#scrolls to top of page
+				$("html:not(:animated),body:not(:animated)")
+					.animate { scrollTop: 0 }, 200
+
 				$('.sidebar').addClass('slide').css('left', '-1500px')
 				$('.center').addClass('leftside').removeClass('center')
 																				 .removeAttr('id')
 				$('.rightside').attr('id', 'container')
 
 				window.setTimeout ->
-					$('.rightside').addClass('center').removeClass('rightside'))
+					$('.rightside').addClass('center').removeClass('rightside')
 				, 0
 				window.setTimeout (-> $('.leftside').remove()), 500
 

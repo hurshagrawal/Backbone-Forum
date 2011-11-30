@@ -37,11 +37,14 @@
         if (this.toAnimate !== true) $container.empty();
         $container.append(forum.roomListView.render().el);
         if (this.toAnimate === true) {
+          $("html:not(:animated),body:not(:animated)").animate({
+            scrollTop: 0
+          }, 200);
           $('.center').addClass('rightside').removeClass('center').removeAttr('id');
           $('.leftside').attr('id', 'container');
-          window.setTimeout((function() {
+          window.setTimeout(function() {
             return $('.leftside').addClass('center').removeClass('leftside');
-          }), 0);
+          }, 0);
           window.setTimeout((function() {
             return $('.rightside').remove();
           }), 500);
@@ -75,12 +78,15 @@
         if (this.toAnimate !== true) $container.empty();
         $container.append(forum.postListView.render().el).append(forum.postFormView.render().el);
         if (this.toAnimate) {
+          $("html:not(:animated),body:not(:animated)").animate({
+            scrollTop: 0
+          }, 200);
           $('.sidebar').addClass('slide').css('left', '-1500px');
           $('.center').addClass('leftside').removeClass('center').removeAttr('id');
           $('.rightside').attr('id', 'container');
-          window.setTimeout((function() {
+          window.setTimeout(function() {
             return $('.rightside').addClass('center').removeClass('rightside');
-          }), 0);
+          }, 0);
           window.setTimeout((function() {
             return $('.leftside').remove();
           }), 500);
