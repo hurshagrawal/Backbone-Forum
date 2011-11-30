@@ -45,7 +45,7 @@ class forum.ForumRouter extends Backbone.Router
 
 	home: =>
 		$ => #wait until page loads, as data is bootstrapped
-			forum.roomSideView.displayed = false
+			forum.roomSideView?.displayed = false
 			$container = @prepareAnimation 'left'
 
 			# actual code

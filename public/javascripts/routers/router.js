@@ -59,8 +59,8 @@
     ForumRouter.prototype.home = function() {
       var _this = this;
       return $(function() {
-        var $container;
-        forum.roomSideView.displayed = false;
+        var $container, _ref;
+        if ((_ref = forum.roomSideView) != null) _ref.displayed = false;
         $container = _this.prepareAnimation('left');
         forum.roomListView = new forum.RoomListView({
           collection: forum.roomList
