@@ -79,7 +79,8 @@ class forum.RoomSideView extends Backbone.View
 			entry.get('room_id') == @model.get('id')
 
 		modelObj.firstPost = @truncatePost(modelObj.posts[0].get('content'), 95)
-		modelObj.secondPost = @truncatePost(modelObj.posts[1].get('content'), 35)
+		if modelObj.posts.length > 1
+			modelObj.secondPost = @truncatePost(modelObj.posts[1].get('content'), 35)
 
 
 		renderedContent = JST['roomSideView'] modelObj

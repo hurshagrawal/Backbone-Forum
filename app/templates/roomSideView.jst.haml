@@ -1,0 +1,21 @@
+.span5.right
+  .close.right x
+  %ul
+    %li
+      %h2.smaller #{topic}
+    %li.first-post
+      %h3.larger "#{firstPost}"
+      %h3.user #{"- " + username}
+    - if (posts.length > 1) {
+    %li
+      .content "#{secondPost}"
+      .user #{"- " + posts[1].get('username')}
+    - }
+    -# - if (posts.length > 2) {
+    -# %li
+    -#   .content "#{posts[2].get('content')}"
+    -#   .user #{"- " + posts[2].get('username')}
+    -# - }
+    %li.go
+      %h2 Visit the Roundtable &rarr;
+      %h2.smallest to see the entire discussion

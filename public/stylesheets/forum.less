@@ -1,0 +1,301 @@
+body {
+	background: #F7F5F5 url(../images/paper.jpg) repeat;
+}
+
+.link, .btn, .brand, .go, .close {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+.error {
+	border-color: #E9322D;
+	-webkit-box-shadow: 0 0 6px #f8b9b7;
+	-moz-box-shadow: 0 0 6px #f8b9b7;
+	box-shadow: 0 0 6px #f8b9b7;
+}
+
+.right {
+	float: right;
+}
+
+.topbar {
+
+	.brand {
+		font-family: Raleway;
+		font-size: 24px;
+		padding: 5px 10px 5px 20px;
+
+		&:hover {
+			background-color: inherit;
+		}
+	}
+
+	div.link {
+		padding: 10px 10px 11px;
+		color: #BFBFBF;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+		cursor: pointer;
+
+		&:hover {
+			background: #222;
+			color: white;
+		}
+	}
+
+	.divider {
+		background-color: #444;
+		height: 27px;
+		margin: 4px 5px;
+		width: 1px;
+	}
+
+	.user-panel {
+
+		.user-text {
+			font-family: Raleway;
+			font-size: 17px;
+			padding: 5px 12px 5px 0px;
+			color: grey;
+			position: relative;
+			top: 1px;
+		}
+
+		.btn {
+			margin-left: 5px;
+		}
+
+		input {
+			height: 25px;
+			width: 200px;
+			margin: 0px 5px;
+		}
+	}
+}
+
+.container.main {
+	margin-top: 50px;
+	margin-bottom: 125px;
+	position: relative;
+
+	.section {
+		padding: 15px;
+		background-color: white;
+		box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+		-moz-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+		-webkit-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
+
+		h1 {
+			font-family: Raleway;
+			font-size: 30px;
+			font-weight: 100;
+		}
+
+		h2 {
+			font-family: Raleway;
+			font-size: 25px;
+			font-weight: 100;
+			line-height: initial;
+			color: grey;
+		}
+
+		h3 {
+			font-size: 15px;
+			font-weight: 300;
+			line-height: initial;
+			color: grey;
+		}
+
+		ul {
+			margin: 15px 0 0 0;
+
+			li.post {
+				list-style: none;
+				position: relative;
+				left: -15px;
+				padding: 15px;
+				margin: -1px 0px;
+				border-top: grey solid 1px;
+				border-bottom: grey solid 1px;
+				cursor: pointer;
+				height: 70px;
+
+				&:first-child {
+					border-top: none;
+				}
+
+				&:last-child {
+					border-bottom: none;
+				}
+
+				&:hover {
+					background-color: #EEE;
+
+					h2, h3 {
+						color: black;
+					}
+				}
+
+				&:active {
+					background-color: #DDD;
+				}
+
+				.topic {
+					padding: 5px;
+				}
+
+				.users {
+					padding: 10px 20px;
+				}
+
+				.created {
+					float: right;
+					padding: 5px;
+				}
+			}
+		}
+
+		&.rooms {
+			z-index: 5;
+			position: relative;
+		}
+
+		&.side-bg {
+			position: absolute;
+			background-color: #FDFDFD;
+			top: 0;
+			bottom: 0;
+			right: 0px;
+			margin: 10px;
+			z-index: -1;
+			box-shadow: none;
+			-moz-box-shadow: none;
+			-webkit-box-shadow: none;
+
+			h2 {
+				margin-bottom: 10px;
+			}
+		}
+
+		&.sidebar {
+			position: fixed;
+			right: 10px;
+			top: 80px;
+			z-index: 1;
+			height: 350px;
+
+			ul {
+				margin-top: 0px;
+			}
+
+			.close {
+				cursor: pointer;
+
+				&:hover {
+					color: black;
+				}
+
+				&:active {
+					color: #666;
+				}
+			}
+
+			.span5.right {
+				position: relative;
+				height: 100%;
+			}
+
+			li {
+				border-bottom: lightgray solid 1px;
+				padding: 10px 5px;
+				list-style: none;
+				margin-left: 10px;
+
+				&:first-child {
+					padding-bottom: 10px;
+					border-bottom: none;
+				}
+
+				&.first-post {
+					padding: 0px 0px 20px 20px;
+
+					.user {
+						margin-left: 135px;
+					}
+				}
+
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+
+			.close {
+					font-family: Raleway;
+					font-size: 25px;
+			}
+
+			.smaller {
+				font-size: 18px;
+				padding: 0px 20px 5px 0px;
+			}
+
+			.larger {
+				font-size: 22px;
+				padding: 0px 15px 5px 0px;
+			}
+
+			.user {
+				margin-left: 150px;
+			}
+
+			.go {
+				text-align: center;
+				padding: 20px 0px 20px;
+				cursor: pointer;
+
+				h2 {
+					font-size: 22px;
+
+					&.smallest {
+						font-size: 16px;
+						margin-left: 12px;
+					}
+				}
+
+				&:hover {
+					background-color: #AAA;
+
+					h2 {
+						color: #EEE;
+					}
+				}
+
+				&:active h2 {
+					color: #222;
+				}
+			}
+
+		}
+	}
+}
+
+
+.post-form {
+	width: 500px;
+}
+
+.post-form textarea {
+	margin: 20px 40px;
+	width: 430px;
+	height: 80px;
+	resize: none;
+}
+
+.post-form button {
+	float: right;
+	margin-right: 30px;
+	margin-top: -10px;
+	padding: 4px 20px;
+}
