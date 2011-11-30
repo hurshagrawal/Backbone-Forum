@@ -12,7 +12,6 @@
 				Backbone.history.start({ pushState: true });
 				forum.postList.reset(#{@posts});
 				forum.roomList.reset(#{@rooms});
-				//console.log("roomList3", forum.roomList.toJSON());
 				forum.currentUser.set(#{@current_user_json});
 			});
 	%body

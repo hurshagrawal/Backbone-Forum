@@ -199,6 +199,8 @@
       RoomListView.__super__.constructor.apply(this, arguments);
     }
 
+    RoomListView.prototype.className = 'list';
+
     RoomListView.prototype.initialize = function() {
       this.collection.bind('reset', this.render);
       return this.collection.bind('add', this.render);

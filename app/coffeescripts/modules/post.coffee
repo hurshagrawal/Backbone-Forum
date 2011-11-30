@@ -26,7 +26,7 @@ class forum.PostView extends Backbone.View
 ###
 
 class forum.PostListView extends Backbone.View
-	className: 'post-list'
+	className: 'post-list list'
 
 	initialize: ->
 		#causes the view to render whenever the collection's data is loaded
@@ -54,7 +54,7 @@ class forum.PostListView extends Backbone.View
 
 class forum.PostFormView extends Backbone.View
 	tagName: 'div'
-	className: 'post-form'
+	className: 'post-form section span10'
 
 	events:
 		'click .post-form button': 'submit'

@@ -114,6 +114,8 @@ class forum.RoomSideView extends Backbone.View
 #
 ###
 class forum.RoomListView extends Backbone.View
+	className: 'list'
+
 	initialize: ->
 		#causes the view to render whenever the collection's data is loaded
 		@collection.bind 'reset', @render

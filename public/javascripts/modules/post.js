@@ -76,7 +76,7 @@
       PostListView.__super__.constructor.apply(this, arguments);
     }
 
-    PostListView.prototype.className = 'post-list';
+    PostListView.prototype.className = 'post-list list';
 
     PostListView.prototype.initialize = function() {
       this.collection.bind('reset', this.render);
@@ -122,7 +122,7 @@
 
     PostFormView.prototype.tagName = 'div';
 
-    PostFormView.prototype.className = 'post-form';
+    PostFormView.prototype.className = 'post-form section span10';
 
     PostFormView.prototype.events = {
       'click .post-form button': 'submit'
