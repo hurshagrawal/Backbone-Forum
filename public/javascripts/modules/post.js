@@ -76,8 +76,6 @@
       PostListView.__super__.constructor.apply(this, arguments);
     }
 
-    PostListView.prototype.tagName = 'section';
-
     PostListView.prototype.className = 'post-list';
 
     PostListView.prototype.initialize = function() {

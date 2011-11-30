@@ -1,6 +1,5 @@
 class forum.Room extends Backbone.Model
 
-
 class forum.RoomList extends Backbone.Collection
 	model: forum.Room
 	url: '/db/rooms'
@@ -29,14 +28,25 @@ class forum.RoomListRoomView extends Backbone.View
 		return this
 
 	showRoom: =>
-		forum.app.navigate "show/room/#{@model.get('id')}", true
+		if forum.roomSideView?
+			forum.sideRoom.set @model.toJSON()
+		else
+			forum.sideRoom = new forum.Room()
+			forum.roomSideView = new forum.RoomSideView
+				model: forum.sideRoom
+
+			$('#container').append forum.roomSideView.render().el
+
+			elementWidth = $(forum.roomSideView.el).width()
+			targetLeft = $('.side-bg').offset().left - 20 - elementWidth
+			$(forum.roomSideView.el).css 'left', targetLeft
+			forum.roomSideView.trigger 'slideIn'
+
+		# forum.app.navigate "show/room/#{@model.get('id')}", true
 
 	toSentence: (arr) ->
-		console.log arr.length
 		return "with #{arr[0]}" if arr.length is 1
-		console.log "one"
 		return "between #{arr.join(" and ")}" if arr.length is 2
-		console.log "two"
 
 		lastEntry = arr.splice arr.length - 1
 		return "between #{arr.join(', ')}, and #{lastEntry}"
@@ -49,13 +59,35 @@ class forum.RoomListRoomView extends Backbone.View
 		return str
 
 ###
+# View for sidebar on right of room list
+#
+###
+class forum.RoomSideView extends Backbone.View
+	className: 'section sidebar span6'
+
+	initialize: ->
+		@model.bind 'change', @render
+		this.bind 'slideIn', this.slideIn
+		this.bind 'slideOut', this.slideOut
+
+	render: =>
+		modelObj = @model.toJSON()
+		renderedContent = JST['roomSideView'] modelObj
+		$(@el).html renderedContent
+		return this
+
+	slideIn: =>
+		$(@el).animate { left: "+=#{$(@el).width()}" }, 200
+
+	slideOut: =>
+		$(@el).animate { left: "-=#{$(@el).width()}" }, 200
+
+
+###
 #	View for room list on main page
 #
 ###
 class forum.RoomListView extends Backbone.View
-	tagName: 'section'
-	className: 'rooms span10'
-
 	initialize: ->
 		#causes the view to render whenever the collection's data is loaded
 		@collection.bind 'reset', @render
@@ -79,8 +111,7 @@ class forum.RoomListView extends Backbone.View
 #
 ###
 class forum.NewRoomView extends Backbone.View
-	tagName: 'div'
-	className: 'new-room-form'
+	className: 'section new-room-form'
 
 	events:
 		'click .submit': 'submit'

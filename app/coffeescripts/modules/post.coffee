@@ -26,7 +26,6 @@ class forum.PostView extends Backbone.View
 ###
 
 class forum.PostListView extends Backbone.View
-	tagName: 'section'
 	className: 'post-list'
 
 	initialize: ->

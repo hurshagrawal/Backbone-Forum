@@ -13,12 +13,16 @@
 	box-shadow: 0 0 6px #f8b9b7;
 }
 
+.right {
+	float: right;
+}
+
 body {
 	background: #F7F5F5 url(../images/paper.jpg) repeat;
 }
 
 .topbar {
-
+	z-index: 10;
 }
 
 	.topbar .brand {
@@ -75,9 +79,26 @@ body {
 #container {
 	margin-top: 50px;
 	margin-bottom: 125px;
+	position: relative;
 }
 
-#container section {
+#container .section.rooms {
+	z-index: 5;
+}
+
+#container .section.side-bg {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0px;
+	margin: 10px;
+	z-index: -10;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+#container .section {
 	padding: 15px;
 	background-color: white;
 	box-shadow: 0 1px 3px rgba(34,25,25,0.4);
@@ -85,17 +106,30 @@ body {
 	-webkit-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
 }
 
-	#container section h2 {
+	#container .section h1 {
 		font-family: Raleway;
 		font-size: 30px;
 		font-weight: 100;
 	}
 
-	#container section ul {
+	#container .section h2 {
+		font-family: Raleway;
+		font-size: 25px;
+		font-weight: 100;
+	}
+
+	#container .section h3 {
+		font-size: 15px;
+		font-weight: 300;
+		line-height: initial;
+		color: grey;
+	}
+
+	#container .section ul {
 		margin: 15px 0 0 0;
 	}
 
-		#container section ul li.post {
+		#container .section ul li.post {
 			list-style: none;
 			position: relative;
 			left: -15px;
@@ -107,38 +141,51 @@ body {
 			height: 70px;
 		}
 
-		#container section ul li.post:first-child {
+		#container .section ul li.post:first-child {
 			border-top: none;
 		}
 
-		#container section ul li.post:last-child {
+		#container .section ul li.post:last-child {
 			border-bottom: none;
 		}
 
-		#container section ul li.post:hover {
+		#container .section ul li.post:hover {
 			background-color: #EEE;
 		}
 
-		#container section ul li.post:active {
+		#container .section ul li.post:active {
 			background-color: #DDD;
 		}
 
-			#container section ul li.post .topic {
+			#container .section ul li.post .topic {
 				font-family: Raleway;
 				font-weight: inherit;
 				font-size: 25px;
 				padding: 5px;
 			}
 
-			#container section ul li.post .users {
- 				padding: 10px 20px;
-				font-size: 15px;
-				font-weight: 300;
+			#container .section ul li.post .users {
+				padding: 10px 20px;
 			}
 
-			#container section ul li.post .created {
+			#container .section ul li.post .created {
 				float: right;
 				padding: 5px;
+			}
+
+#container .section.side-bg {
+}
+
+	#container .section.side-bg h2 {
+		margin-bottom: 10px;
+	}
+
+#container .section.sidebar {
+	position: fixed;
+	right: 10px;
+	top: 80px;
+	z-index: -1;
+	height: 350px;
 }
 
 .post-form {

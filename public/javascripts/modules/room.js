@@ -67,16 +67,26 @@
     };
 
     RoomListRoomView.prototype.showRoom = function() {
-      return forum.app.navigate("show/room/" + (this.model.get('id')), true);
+      var elementWidth, targetLeft;
+      if (forum.roomSideView != null) {
+        return forum.sideRoom.set(this.model.toJSON());
+      } else {
+        forum.sideRoom = new forum.Room();
+        forum.roomSideView = new forum.RoomSideView({
+          model: forum.sideRoom
+        });
+        $('#container').append(forum.roomSideView.render().el);
+        elementWidth = $(forum.roomSideView.el).width();
+        targetLeft = $('.side-bg').offset().left - 20 - elementWidth;
+        $(forum.roomSideView.el).css('left', targetLeft);
+        return forum.roomSideView.trigger('slideIn');
+      }
     };
 
     RoomListRoomView.prototype.toSentence = function(arr) {
       var lastEntry;
-      console.log(arr.length);
       if (arr.length === 1) return "with " + arr[0];
-      console.log("one");
       if (arr.length === 2) return "between " + (arr.join(" and "));
-      console.log("two");
       lastEntry = arr.splice(arr.length - 1);
       return "between " + (arr.join(', ')) + ", and " + lastEntry;
     };
@@ -95,6 +105,54 @@
   })();
 
   /*
+  # View for sidebar on right of room list
+  #
+  */
+
+  forum.RoomSideView = (function() {
+
+    __extends(RoomSideView, Backbone.View);
+
+    function RoomSideView() {
+      this.slideOut = __bind(this.slideOut, this);
+      this.slideIn = __bind(this.slideIn, this);
+      this.render = __bind(this.render, this);
+      RoomSideView.__super__.constructor.apply(this, arguments);
+    }
+
+    RoomSideView.prototype.className = 'section sidebar span6';
+
+    RoomSideView.prototype.initialize = function() {
+      this.model.bind('change', this.render);
+      this.bind('slideIn', this.slideIn);
+      return this.bind('slideOut', this.slideOut);
+    };
+
+    RoomSideView.prototype.render = function() {
+      var modelObj, renderedContent;
+      modelObj = this.model.toJSON();
+      renderedContent = JST['roomSideView'](modelObj);
+      $(this.el).html(renderedContent);
+      return this;
+    };
+
+    RoomSideView.prototype.slideIn = function() {
+      return $(this.el).animate({
+        left: "+=" + ($(this.el).width())
+      }, 200);
+    };
+
+    RoomSideView.prototype.slideOut = function() {
+      return $(this.el).animate({
+        left: "-=" + ($(this.el).width())
+      }, 200);
+    };
+
+    return RoomSideView;
+
+  })();
+
+  /*
   #	View for room list on main page
   #
   */
@@ -107,10 +165,6 @@
       this.render = __bind(this.render, this);
       RoomListView.__super__.constructor.apply(this, arguments);
     }
-
-    RoomListView.prototype.tagName = 'section';
-
-    RoomListView.prototype.className = 'rooms span10';
 
     RoomListView.prototype.initialize = function() {
       this.collection.bind('reset', this.render);
@@ -152,9 +206,7 @@
       NewRoomView.__super__.constructor.apply(this, arguments);
     }
 
-    NewRoomView.prototype.tagName = 'div';
-
-    NewRoomView.prototype.className = 'new-room-form';
+    NewRoomView.prototype.className = 'section new-room-form';
 
     NewRoomView.prototype.events = {
       'click .submit': 'submit'
