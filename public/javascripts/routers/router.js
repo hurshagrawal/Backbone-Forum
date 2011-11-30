@@ -26,11 +26,27 @@
     ForumRouter.prototype.home = function() {
       return $(function() {
         var $container;
-        $container = $("#container");
+        if (this.toAnimate === true) {
+          $container = $('<div class="slide leftside"></div>').appendTo('.container.main');
+        } else {
+          $container = $("#container");
+        }
         forum.roomListView = new forum.RoomListView({
           collection: forum.roomList
         });
-        return $container.empty().append(forum.roomListView.render().el);
+        if (this.toAnimate !== true) $container.empty();
+        $container.append(forum.roomListView.render().el);
+        if (this.toAnimate === true) {
+          $('.center').addClass('rightside').removeClass('center').removeAttr('id');
+          $('.leftside').attr('id', 'container');
+          window.setTimeout((function() {
+            return $('.leftside').addClass('center').removeClass('leftside');
+          }), 0);
+          window.setTimeout((function() {
+            return $('.rightside').remove();
+          }), 500);
+        }
+        return this.toAnimate = true;
       });
     };
 
@@ -38,7 +54,11 @@
       return $(function() {
         var $container, postList, room;
         var _this = this;
-        $container = $('#container');
+        if (this.toAnimate === true) {
+          $container = $('<div class="slide rightside"></div>').appendTo('.container.main');
+        } else {
+          $container = $("#container");
+        }
         room = forum.roomList.get(room_id);
         postList = forum.postList.select(function(entry) {
           return entry.get('room_id') === room.get('id');
@@ -52,7 +72,20 @@
           collection: room.collection,
           model: room
         });
-        return $container.empty().append(forum.postListView.render().el).append(forum.postFormView.render().el);
+        if (this.toAnimate !== true) $container.empty();
+        $container.append(forum.postListView.render().el).append(forum.postFormView.render().el);
+        if (this.toAnimate) {
+          $('.sidebar').addClass('slide').css('left', '-1500px');
+          $('.center').addClass('leftside').removeClass('center').removeAttr('id');
+          $('.rightside').attr('id', 'container');
+          window.setTimeout((function() {
+            return $('.rightside').addClass('center').removeClass('rightside');
+          }), 0);
+          window.setTimeout((function() {
+            return $('.leftside').remove();
+          }), 500);
+        }
+        return this.toAnimate = true;
       });
     };
 
@@ -60,7 +93,8 @@
       forum.newRoomView = new forum.NewRoomView({
         collection: forum.roomList
       });
-      return $('#container').empty().append(forum.newRoomView.render().el);
+      $('#container').empty().append(forum.newRoomView.render().el);
+      return this.toAnimate = true;
     };
 
     return ForumRouter;

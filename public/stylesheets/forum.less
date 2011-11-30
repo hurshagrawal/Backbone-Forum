@@ -1,3 +1,7 @@
+html {
+	overflow-x: hidden;
+}
+
 body {
 	background: #F7F5F5 url(../images/paper.jpg) repeat;
 }
@@ -19,6 +23,28 @@ body {
 
 .right {
 	float: right;
+}
+
+.rightside {
+	position: absolute;
+	right: -1500px;
+	left: 1500px;
+}
+
+.leftside {
+	position: absolute;
+	right: 1500px;
+	left: -1500px;
+}
+
+.center {
+	position: absolute;
+	right: 0px;
+	left: 0px;
+}
+
+.slide {
+	.transition(all, 0.5s);
 }
 
 .topbar {
@@ -77,8 +103,11 @@ body {
 
 .container.main {
 	margin-top: 50px;
-	margin-bottom: 125px;
 	position: relative;
+
+	#container {
+		margin-bottom: 125px;
+	}
 
 	.section {
 		padding: 15px;
@@ -160,13 +189,14 @@ body {
 		&.rooms {
 			z-index: 5;
 			position: relative;
+			margin-bottom: 200px;
 		}
 
 		&.side-bg {
 			position: absolute;
 			background-color: #FDFDFD;
 			top: 0;
-			bottom: 0;
+			bottom: 200px;
 			right: 0px;
 			margin: 10px;
 			z-index: -1;
@@ -298,4 +328,11 @@ body {
 	margin-right: 30px;
 	margin-top: -10px;
 	padding: 4px 20px;
+}
+
+.transition(@range: all, @time: 1s, @ease: ease-in-out) {
+	-moz-transition: @range @time @ease;
+	-webkit-transition: @range @time @ease;
+	-o-transition: @range @time @ease;
+	transition: @range @time @ease;
 }
