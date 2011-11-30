@@ -143,7 +143,7 @@
       modelObj.posts = forum.postList.select(function(entry) {
         return entry.get('room_id') === _this.model.get('id');
       });
-      modelObj.firstPost = this.truncatePost(modelObj.posts[0].get('content'), 95);
+      modelObj.firstPost = this.truncatePost(modelObj.posts[0].get('content'), 90);
       if (modelObj.posts.length > 1) {
         modelObj.secondPost = this.truncatePost(modelObj.posts[1].get('content'), 35);
       }

@@ -81,7 +81,7 @@ class forum.RoomSideView extends Backbone.View
 		modelObj.posts = forum.postList.select (entry) =>
 			entry.get('room_id') == @model.get('id')
 
-		modelObj.firstPost = @truncatePost(modelObj.posts[0].get('content'), 95)
+		modelObj.firstPost = @truncatePost(modelObj.posts[0].get('content'), 90)
 		if modelObj.posts.length > 1
 			modelObj.secondPost = @truncatePost(modelObj.posts[1].get('content'), 35)
 
