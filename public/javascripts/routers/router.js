@@ -1,11 +1,16 @@
 (function() {
-  var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }, __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
   forum.ForumRouter = (function() {
 
     __extends(ForumRouter, Backbone.Router);
 
     function ForumRouter() {
+      this.showNew = __bind(this.showNew, this);
+      this.showRoom = __bind(this.showRoom, this);
+      this.home = __bind(this.home, this);
+      this.startAnimation = __bind(this.startAnimation, this);
+      this.prepareAnimation = __bind(this.prepareAnimation, this);
       ForumRouter.__super__.constructor.apply(this, arguments);
     }
 
@@ -23,45 +28,54 @@
       return forum.roomList = new forum.RoomList();
     };
 
+    ForumRouter.prototype.prepareAnimation = function(from) {
+      var fromSide;
+      fromSide = from === 'left' ? 'leftside' : 'rightside';
+      if (this.toAnimate === true) {
+        return $("<div class='slide " + fromSide + "'></div>").appendTo('.container.main');
+      } else {
+        return $("#container");
+      }
+    };
+
+    ForumRouter.prototype.startAnimation = function(direction) {
+      var fromSide, toSide;
+      fromSide = direction === 'left' ? 'leftside' : 'rightside';
+      toSide = direction === 'left' ? 'rightside' : 'leftside';
+      $("html:not(:animated),body:not(:animated)").animate({
+        scrollTop: 0
+      }, 200);
+      $('.sidebar').addClass('slide').css('left', '-1500px');
+      $('.center').addClass(fromSide).removeClass('center').removeAttr('id');
+      $("." + toSide).attr('id', 'container');
+      window.setTimeout(function() {
+        return $("." + toSide).addClass('center').removeClass("" + toSide);
+      }, 0);
+      return window.setTimeout((function() {
+        return $("." + fromSide).remove();
+      }), 500);
+    };
+
     ForumRouter.prototype.home = function() {
+      var _this = this;
       return $(function() {
         var $container;
-        if (this.toAnimate === true) {
-          $container = $('<div class="slide leftside"></div>').appendTo('.container.main');
-        } else {
-          $container = $("#container");
-        }
+        $container = _this.prepareAnimation('left');
         forum.roomListView = new forum.RoomListView({
           collection: forum.roomList
         });
-        if (this.toAnimate !== true) $container.empty();
+        if (_this.toAnimate !== true) $container.empty();
         $container.append(forum.roomListView.render().el);
-        if (this.toAnimate === true) {
-          $("html:not(:animated),body:not(:animated)").animate({
-            scrollTop: 0
-          }, 200);
-          $('.center').addClass('rightside').removeClass('center').removeAttr('id');
-          $('.leftside').attr('id', 'container');
-          window.setTimeout(function() {
-            return $('.leftside').addClass('center').removeClass('leftside');
-          }, 0);
-          window.setTimeout((function() {
-            return $('.rightside').remove();
-          }), 500);
-        }
-        return this.toAnimate = true;
+        if (_this.toAnimate === true) _this.startAnimation('right');
+        return _this.toAnimate = true;
       });
     };
 
     ForumRouter.prototype.showRoom = function(room_id) {
+      var _this = this;
       return $(function() {
         var $container, postList, room;
-        var _this = this;
-        if (this.toAnimate === true) {
-          $container = $('<div class="slide rightside"></div>').appendTo('.container.main');
-        } else {
-          $container = $("#container");
-        }
+        $container = _this.prepareAnimation('right');
         room = forum.roomList.get(room_id);
         postList = forum.postList.select(function(entry) {
           return entry.get('room_id') === room.get('id');
@@ -75,51 +89,21 @@
           collection: room.collection,
           model: room
         });
-        if (this.toAnimate !== true) $container.empty();
+        if (_this.toAnimate !== true) $container.empty();
         $container.append(forum.postListView.render().el).append(forum.postFormView.render().el);
-        if (this.toAnimate) {
-          $("html:not(:animated),body:not(:animated)").animate({
-            scrollTop: 0
-          }, 200);
-          $('.sidebar').addClass('slide').css('left', '-1500px');
-          $('.center').addClass('leftside').removeClass('center').removeAttr('id');
-          $('.rightside').attr('id', 'container');
-          window.setTimeout(function() {
-            return $('.rightside').addClass('center').removeClass('rightside');
-          }, 0);
-          window.setTimeout((function() {
-            return $('.leftside').remove();
-          }), 500);
-        }
-        return this.toAnimate = true;
+        if (_this.toAnimate === true) _this.startAnimation('left');
+        return _this.toAnimate = true;
       });
     };
 
     ForumRouter.prototype.showNew = function() {
       var $container;
-      if (this.toAnimate === true) {
-        $container = $('<div class="slide rightside"></div>').appendTo('.container.main');
-      } else {
-        $container = $("#container");
-      }
+      $container = this.prepareAnimation('right');
       forum.newRoomView = new forum.NewRoomView({
         collection: forum.roomList
       });
       $container.append(forum.newRoomView.render().el);
-      if (this.toAnimate) {
-        $("html:not(:animated),body:not(:animated)").animate({
-          scrollTop: 0
-        }, 200);
-        $('.sidebar').addClass('slide').css('left', '-1500px');
-        $('.center').addClass('leftside').removeClass('center').removeAttr('id');
-        $('.rightside').attr('id', 'container');
-        window.setTimeout(function() {
-          return $('.rightside').addClass('center').removeClass('rightside');
-        }, 0);
-        window.setTimeout((function() {
-          return $('.leftside').remove();
-        }), 500);
-      }
+      if (this.toAnimate === true) this.startAnimation('left');
       return this.toAnimate = true;
     };
 

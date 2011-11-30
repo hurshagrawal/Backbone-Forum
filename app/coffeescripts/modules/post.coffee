@@ -54,7 +54,7 @@ class forum.PostListView extends Backbone.View
 
 class forum.PostFormView extends Backbone.View
 	tagName: 'div'
-	className: 'post-form section span10'
+	className: 'form-wrapper'
 
 	events:
 		'click .post-form button': 'submit'

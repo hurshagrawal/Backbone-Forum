@@ -47,8 +47,9 @@ class forum.RoomListRoomView extends Backbone.View
 		return "with #{arr[0]}" if arr.length is 1
 		return "between #{arr.join(" and ")}" if arr.length is 2
 
-		lastEntry = arr.splice arr.length - 1
-		return "between #{arr.join(', ')}, and #{lastEntry}"
+		arrClone = arr.slice 0
+		lastEntry = arrClone.splice arrClone.length - 1
+		return "between #{arrClone.join(', ')}, and #{lastEntry}"
 
 	toDateString: (dateStr) ->
 		date = new Date(dateStr)

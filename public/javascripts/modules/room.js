@@ -84,11 +84,12 @@
     };
 
     RoomListRoomView.prototype.toSentence = function(arr) {
-      var lastEntry;
+      var arrClone, lastEntry;
       if (arr.length === 1) return "with " + arr[0];
       if (arr.length === 2) return "between " + (arr.join(" and "));
-      lastEntry = arr.splice(arr.length - 1);
-      return "between " + (arr.join(', ')) + ", and " + lastEntry;
+      arrClone = arr.slice(0);
+      lastEntry = arrClone.splice(arrClone.length - 1);
+      return "between " + (arrClone.join(', ')) + ", and " + lastEntry;
     };
 
     RoomListRoomView.prototype.toDateString = function(dateStr) {

@@ -122,7 +122,7 @@
 
     PostFormView.prototype.tagName = 'div';
 
-    PostFormView.prototype.className = 'post-form section span10';
+    PostFormView.prototype.className = 'form-wrapper';
 
     PostFormView.prototype.events = {
       'click .post-form button': 'submit'
