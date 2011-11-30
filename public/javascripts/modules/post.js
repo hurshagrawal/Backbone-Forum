@@ -72,11 +72,18 @@
     __extends(PostListView, Backbone.View);
 
     function PostListView() {
+      this.showNext = __bind(this.showNext, this);
+      this.showPrev = __bind(this.showPrev, this);
       this.render = __bind(this.render, this);
       PostListView.__super__.constructor.apply(this, arguments);
     }
 
     PostListView.prototype.className = 'post-list list';
+
+    PostListView.prototype.events = {
+      'click .prev': 'showPrev',
+      'click .next': 'showNext'
+    };
 
     PostListView.prototype.initialize = function() {
       this.collection.bind('reset', this.render);
@@ -99,6 +106,36 @@
         return $postList.append(view.render().el);
       });
       return this;
+    };
+
+    PostListView.prototype.showPrev = function() {
+      var newRoomID, roomIndex;
+      forum.animateDirection = {
+        from: 'left',
+        to: 'right'
+      };
+      roomIndex = forum.roomList.indexOf(this.model) - 1;
+      if (roomIndex < 0) {
+        newRoomID = forum.roomList.last().get('id');
+      } else {
+        newRoomID = forum.roomList.models[roomIndex].get('id');
+      }
+      return forum.app.navigate("show/room/" + newRoomID, true);
+    };
+
+    PostListView.prototype.showNext = function() {
+      var newRoomID, roomIndex;
+      forum.animateDirection = {
+        from: 'right',
+        to: 'left'
+      };
+      roomIndex = forum.roomList.indexOf(this.model) + 1;
+      if (roomIndex === forum.roomList.models.length) {
+        newRoomID = forum.roomList.first().get('id');
+      } else {
+        newRoomID = forum.roomList.models[roomIndex].get('id');
+      }
+      return forum.app.navigate("show/room/" + newRoomID, true);
     };
 
     return PostListView;

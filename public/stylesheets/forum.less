@@ -6,7 +6,7 @@ body {
 	background: #F7F5F5 url(../images/paper.jpg) repeat;
 }
 
-.link, .btn, .brand, .go, .close {
+.link, .btn, .brand, .go, .close, .rt-btn {
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
@@ -365,7 +365,55 @@ body {
 				font-family: Raleway;
 			}
 		}
+
+		&.posts {
+			.header {
+				margin-right: 175px;
+				font-size: 25px;
+			}
+
+			.next {
+				float: right;
+			}
+
+			.prev {
+				float: right;
+			}
+		}
+
 	}
+}
+
+.rt-btn {
+	.radius(5px);
+	padding: 6px;
+	width: 66px;
+	text-align: center;
+	font-weight: 100;
+	font-size: 16px;
+	margin: 2px;
+	cursor: pointer;
+	border: #444 solid 1px;
+	color: #444;
+	/*background: #F6F6F6;*/
+
+	&:hover {
+		border: white solid 1px;
+		color: white;
+		background: #555;
+	}
+
+	&:active {
+		color: black;
+		background: #999;
+	}
+
+}
+
+.radius(@value: 5px) {
+	-webkit-border-radius: @value;
+	-moz-border-radius: @value;
+	border-radius: @value;
 }
 
 .transition(@range: all, @time: 1s, @ease: ease-in-out) {

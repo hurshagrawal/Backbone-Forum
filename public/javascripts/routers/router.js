@@ -40,19 +40,19 @@
 
     ForumRouter.prototype.startAnimation = function(direction) {
       var fromSide, toSide;
-      fromSide = direction === 'left' ? 'leftside' : 'rightside';
-      toSide = direction === 'left' ? 'rightside' : 'leftside';
+      fromSide = "" + (direction === 'left' ? 'right' : 'left') + "side";
+      toSide = "" + direction + "side";
       $("html:not(:animated),body:not(:animated)").animate({
         scrollTop: 0
       }, 200);
       $('.sidebar').addClass('slide').css('left', '-1500px');
-      $('.center').addClass(fromSide).removeClass('center').removeAttr('id');
-      $("." + toSide).attr('id', 'container');
+      $('.center').addClass(toSide).removeClass('center').removeAttr('id');
+      $("." + fromSide).attr('id', 'container');
       window.setTimeout(function() {
-        return $("." + toSide).addClass('center').removeClass("" + toSide);
+        return $("." + fromSide).addClass('center').removeClass("" + fromSide);
       }, 0);
       return window.setTimeout((function() {
-        return $("." + fromSide).remove();
+        return $("." + toSide).remove();
       }), 500);
     };
 
@@ -75,7 +75,11 @@
       var _this = this;
       return $(function() {
         var $container, postList, room;
-        $container = _this.prepareAnimation('right');
+        if (forum.animateDirection != null) {
+          $container = _this.prepareAnimation(forum.animateDirection.from);
+        } else {
+          $container = _this.prepareAnimation('right');
+        }
         room = forum.roomList.get(room_id);
         postList = forum.postList.select(function(entry) {
           return entry.get('room_id') === room.get('id');
@@ -91,7 +95,14 @@
         });
         if (_this.toAnimate !== true) $container.empty();
         $container.append(forum.postListView.render().el).append(forum.postFormView.render().el);
-        if (_this.toAnimate === true) _this.startAnimation('left');
+        if (_this.toAnimate === true) {
+          if (forum.animateDirection != null) {
+            _this.startAnimation(forum.animateDirection.to);
+            forum.animateDirection = null;
+          } else {
+            _this.startAnimation('left');
+          }
+        }
         return _this.toAnimate = true;
       });
     };

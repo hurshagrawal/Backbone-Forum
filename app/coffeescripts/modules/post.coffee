@@ -28,6 +28,10 @@ class forum.PostView extends Backbone.View
 class forum.PostListView extends Backbone.View
 	className: 'post-list list'
 
+	events:
+		'click .prev': 'showPrev'
+		'click .next': 'showNext'
+
 	initialize: ->
 		#causes the view to render whenever the collection's data is loaded
 		@collection.bind 'reset', @render
@@ -46,6 +50,32 @@ class forum.PostListView extends Backbone.View
 			$postList.append view.render().el
 
 		return this
+
+	showPrev: =>
+		forum.animateDirection =
+			from: 'left'
+			to: 'right'
+
+		roomIndex = forum.roomList.indexOf(@model) - 1
+		if roomIndex < 0
+			newRoomID = forum.roomList.last().get('id')
+		else
+			newRoomID = forum.roomList.models[roomIndex].get('id')
+
+		forum.app.navigate "show/room/#{newRoomID}", true
+
+	showNext: =>
+		forum.animateDirection =
+			from: 'right'
+			to: 'left'
+
+		roomIndex = forum.roomList.indexOf(@model) + 1
+		if roomIndex == forum.roomList.models.length
+			newRoomID = forum.roomList.first().get('id')
+		else
+			newRoomID = forum.roomList.models[roomIndex].get('id')
+
+		forum.app.navigate "show/room/#{newRoomID}", true
 
 ###
 # View for posting new posts

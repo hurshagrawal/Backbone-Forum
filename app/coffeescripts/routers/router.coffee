@@ -26,22 +26,22 @@ class forum.ForumRouter extends Backbone.Router
 			return $("#container")
 
 	startAnimation: (direction) =>
-		fromSide = if direction is 'left' then 'leftside' else 'rightside'
-		toSide = if direction is 'left' then 'rightside' else 'leftside'
+		fromSide = "#{if direction is 'left' then 'right' else 'left'}side"
+		toSide = "#{direction}side"
 
 		#scrolls to top of page
 		$("html:not(:animated),body:not(:animated)")
 			.animate { scrollTop: 0 }, 200
 
 		$('.sidebar').addClass('slide').css('left', '-1500px')
-		$('.center').addClass(fromSide).removeClass('center')
-																			.removeAttr('id')
-		$(".#{toSide}").attr('id', 'container')
+		$('.center').addClass(toSide).removeClass('center')
+															 	.removeAttr('id')
+		$(".#{fromSide}").attr('id', 'container')
 
 		window.setTimeout ->
-			$(".#{toSide}").addClass('center').removeClass("#{toSide}")
+			$(".#{fromSide}").addClass('center').removeClass("#{fromSide}")
 		, 0
-		window.setTimeout (-> $(".#{fromSide}").remove()), 500
+		window.setTimeout (-> $(".#{toSide}").remove()), 500
 
 	home: =>
 		$ => #wait until page loads, as data is bootstrapped
@@ -62,7 +62,10 @@ class forum.ForumRouter extends Backbone.Router
 
 	showRoom: (room_id) =>
 		$ =>
-			$container = @prepareAnimation 'right'
+			if forum.animateDirection?
+				$container = @prepareAnimation forum.animateDirection.from
+			else
+				$container = @prepareAnimation 'right'
 
 			#actual code
 			room = forum.roomList.get(room_id)
@@ -84,7 +87,12 @@ class forum.ForumRouter extends Backbone.Router
 								.append(forum.postFormView.render().el)
 
 			# animation start
-			@startAnimation('left') if @toAnimate is true
+			if @toAnimate is true
+				if forum.animateDirection?
+					@startAnimation forum.animateDirection.to
+					forum.animateDirection = null
+				else
+					@startAnimation 'left'
 
 			#animates transitions in the future
 			@toAnimate = true
