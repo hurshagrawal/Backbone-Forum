@@ -60,6 +60,7 @@
       var _this = this;
       return $(function() {
         var $container;
+        forum.roomSideView.displayed = false;
         $container = _this.prepareAnimation('left');
         forum.roomListView = new forum.RoomListView({
           collection: forum.roomList
