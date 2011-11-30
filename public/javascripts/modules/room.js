@@ -93,10 +93,11 @@
     };
 
     RoomListRoomView.prototype.toDateString = function(dateStr) {
-      var date, str;
+      var date, m, str;
       date = new Date(dateStr);
-      str = "" + (date.getHours()) + ":" + (date.getMinutes()) + " ";
-      str += "" + (date.getDate()) + "/" + (date.getMonth()) + "/";
+      m = date.getMinutes();
+      str = "" + (date.getHours()) + ":" + (m < 10 ? "0" + m : m) + " ";
+      str += "" + (date.getMonth()) + "/" + (date.getDate()) + "/";
       str += "" + (date.getFullYear().toString().substr(2, 2));
       return str;
     };

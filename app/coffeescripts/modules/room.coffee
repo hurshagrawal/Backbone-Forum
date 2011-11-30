@@ -53,8 +53,10 @@ class forum.RoomListRoomView extends Backbone.View
 
 	toDateString: (dateStr) ->
 		date = new Date(dateStr)
-		str = "#{date.getHours()}:#{date.getMinutes()} "
-		str += "#{date.getDate()}/#{date.getMonth()}/"
+		m = date.getMinutes()
+
+		str = "#{date.getHours()}:#{if m < 10 then "0#{m}" else m} "
+		str += "#{date.getMonth()}/#{date.getDate()}/"
 		str += "#{date.getFullYear().toString().substr(2,2)}"
 		return str
 
