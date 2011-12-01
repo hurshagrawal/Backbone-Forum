@@ -42,11 +42,11 @@ class forum.UserView extends Backbone.View
 			success: (mode, data) =>
 				if data.exists == true #if username already exists
 					@render()
-					this.$('.alert-text').html 'That username is taken'
+					this.$('.alert-text').html 'Username is taken'
 				else
 					@model.set data
 			error: (object, error) =>
-				this.$('.alert-text').html 'There was some sort of error. Try again.'
+				this.$('.alert-text').html 'There was an error :('
 
 	login: ->
 		data =
@@ -58,9 +58,9 @@ class forum.UserView extends Backbone.View
 				@model.set response.user
 			else if response.exists == false
 				@render()
-				this.$('.alert-text').html 'Username or password is incorrect'
+				this.$('.alert-text').html 'UN or PW is incorrect'
 			else
-				this.$('.alert-text').html 'There was some sort of error. Try again.'
+				this.$('.alert-text').html 'There was an error :('
 
 	logout: ->
 		$.post '/db/sessions', { '_method': 'delete' }, (response) =>

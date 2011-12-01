@@ -69,13 +69,13 @@
         success: function(mode, data) {
           if (data.exists === true) {
             _this.render();
-            return _this.$('.alert-text').html('That username is taken');
+            return _this.$('.alert-text').html('Username is taken');
           } else {
             return _this.model.set(data);
           }
         },
         error: function(object, error) {
-          return _this.$('.alert-text').html('There was some sort of error. Try again.');
+          return _this.$('.alert-text').html('There was an error :(');
         }
       });
     };
@@ -92,9 +92,9 @@
           return _this.model.set(response.user);
         } else if (response.exists === false) {
           _this.render();
-          return _this.$('.alert-text').html('Username or password is incorrect');
+          return _this.$('.alert-text').html('UN or PW is incorrect');
         } else {
-          return _this.$('.alert-text').html('There was some sort of error. Try again.');
+          return _this.$('.alert-text').html('There was an error :(');
         }
       });
     };
