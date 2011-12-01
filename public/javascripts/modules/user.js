@@ -57,11 +57,13 @@
     };
 
     UserView.prototype.signup = function() {
-      var newUser;
+      var newUser, un;
       var _this = this;
+      un = this.$('.un').val().pw = this.$('.pw').val();
+      if (un.trim() === "" || pw.trim() === "") return;
       newUser = new forum.User({
-        username: this.$('.un').val(),
-        password: this.$('.pw').val()
+        username: un,
+        password: pw
       });
       return newUser.save({}, {
         success: function(mode, data) {

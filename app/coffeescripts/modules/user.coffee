@@ -28,9 +28,15 @@ class forum.UserView extends Backbone.View
 		return this
 
 	signup: ->
+
+		un = this.$('.un').val().
+		pw = this.$('.pw').val()
+
+		return if un.trim() is "" or pw.trim() is ""
+
 		newUser = new forum.User
-			username: this.$('.un').val()
-			password: this.$('.pw').val()
+			username: un
+			password: pw
 
 		newUser.save {},
 			success: (mode, data) =>
