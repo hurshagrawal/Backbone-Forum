@@ -29,8 +29,8 @@ class forum.UserView extends Backbone.View
 
 	signup: ->
 
-		un = this.$('.un').val().
-		pw = this.$('.pw').val()
+		un = @$('.un').val()
+		pw = @$('.pw').val()
 
 		return if un.trim() is "" or pw.trim() is ""
 
